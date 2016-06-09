@@ -57,6 +57,21 @@ public class TestEnvironment
 	{
 		Environment.resetInstance();
 	}
+	/**
+	 * Test getWeapon() method.
+	 * @author Jixiang Lu.
+	 */
+	@Test
+	public void testGetWeapon()
+	{
+		Environment env = Environment.getWorldInstance();
+		Weapon w1 = new PlasmaCannon();
+		Weapon w2 = new Pistol();
+		env.addWeapon(0, 0, w1, 1);
+		env.addWeapon(0, 0, w2, 2);
+		assertEquals(w1,env.getWeapon(0, 0, 1));
+		assertEquals(w2,env.getWeapon(0, 0, 2));
+	}
 	
 	/**
 	 * @author - Prathyusha Akshintala
