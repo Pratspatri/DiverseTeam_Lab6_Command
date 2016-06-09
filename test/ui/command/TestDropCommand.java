@@ -9,7 +9,7 @@ import lifeform.MockLifeForm;
 import org.junit.Before;
 import org.junit.Test;
 
-import weapon.MockWeapon;
+import weapon.MockGenericWeapon;
 import weapon.Weapon;
 import environment.Environment;
 
@@ -28,7 +28,7 @@ public class TestDropCommand
 	@Before
 	public void resetEnvironment()
 	{
-		Environment.getWorldInstance().clearBoard();
+		Environment.resetInstance();
 	}
 	
 	/**
@@ -59,18 +59,18 @@ public class TestDropCommand
 		assertNull(life.getWeapon());
 		
 		//LifeForm has weapon and there is enough space for the weapon in the Cell.
-		Weapon wpCell = new MockWeapon(50,15,1,5);
-		Weapon wpLife = new MockWeapon(50,15,1,5);
-		env.addWeapon(0, 0, wpCell);
-		life.pickUpWeapon(wpLife);
+		Weapon wpCell = new MockGenericWeapon(50,15,1,5);
+		Weapon wpLife = new MockGenericWeapon(50,15,1,5);
+		env.addWeapon(0, 0, wpCell,1);
+		life.pickUp(wpLife);
 		infor = drop.execute();
 		assertEquals("Weapon has benn dropped",infor);
 		assertNull(life.getWeapon());
-		assertEquals(wpLife,env.getWeapon(0, 0, 1));
+		assertEquals(wpLife,env.getWeapon(0, 0, 2));
 
 		//There is no space for the Weapon in the Cell.
-		Weapon wpLife2 = new MockWeapon(50,15,1,5);
-		life.pickUpWeapon(wpLife2);
+		Weapon wpLife2 = new MockGenericWeapon(50,15,1,5);
+		life.pickUp(wpLife2);
 		infor = drop.execute();
 		assertEquals("Weapon cannot be dropped.",infor);
 		assertEquals(wpLife2,life.getWeapon());

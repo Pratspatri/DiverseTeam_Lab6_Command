@@ -57,6 +57,7 @@ public class TestEnvironment
 	{
 		Environment.resetInstance();
 	}
+	
 	/**
 	 * Test getWeapon() method.
 	 * @author Jixiang Lu.

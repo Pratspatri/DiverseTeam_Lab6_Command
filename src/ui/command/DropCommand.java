@@ -33,14 +33,14 @@ public class DropCommand implements Command
 	public String execute()
 	{
 		Environment env = Environment.getWorldInstance();
-		Weapon slot1 = env. getWeapon(life.getRowTrack(), life.getColTrack() , 0);
-		Weapon slot2 = env.getWeapon(life.getRowTrack() , life.getColTrack(), 1);
+		Weapon slot1 = env. getWeapon(life.getRowTrack(), life.getColTrack() , 1);
+		Weapon slot2 = env.getWeapon(life.getRowTrack() , life.getColTrack(), 2);
 		if(slot1 != null&& slot2 !=null)
 			return "Weapon cannot be dropped.";
 		else
 		{
-
-			env.addWeapon(life.getX_coordinate(), life.getY_coordinate(), life.getWeapon());
+			int position = (slot1 == null)?1:2;
+			env.addWeapon(life.getRowTrack(), life.getColTrack(), life.getWeapon(),position);
 			life.dropWeapon();
 			return "Weapon has benn dropped";
 		}
