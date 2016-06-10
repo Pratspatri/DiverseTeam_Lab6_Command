@@ -39,6 +39,7 @@ public class Alien extends LifeForm
 		maxLifePoints = currentLifePoints;
 		recoveryBehavior = null;
 		attachStrength = 10;
+		maxSpeed=2;
 	}
 
 	/**

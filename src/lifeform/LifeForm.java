@@ -44,6 +44,11 @@ public abstract class LifeForm implements TimeObserver
 	private int trackCol;
 
 	/**
+	 * Max speed and direction for lifeform
+	 */
+	 protected int maxSpeed=0;
+	 protected String direction="North";
+	/**
 	 * Modified existing method - @author - Prathyusha Akshintala
 	 * Create an instance of LifeForm with given values.
 	 * @param name: The name of the life form.
@@ -57,6 +62,8 @@ public abstract class LifeForm implements TimeObserver
 		weapon = null;
 		trackRow = -1;
 		trackCol = -1;
+		 maxSpeed=0;
+		 direction="North";
 	}
 
 	/**
@@ -220,5 +227,36 @@ public abstract class LifeForm implements TimeObserver
 	{
 		return this.trackCol;
 	}
-
+	/**
+	 * Change the direction for life form
+	 * @param direction
+	 */
+	  public void setDirection(String direction)
+	  {
+		  this.direction=direction;
+	  }
+	  /**
+	   * get Direction for any life form
+	   * @return  direction 
+	   */
+	  public String getDirection()
+	  {
+		  return direction;
+	  }
+	  /**
+	   * Set Max speed
+	   * @param maxSpeed
+	   */
+	  public void setMaxSpeed(int maxSpeed)
+	  {
+		  this.maxSpeed=maxSpeed;
+	  }
+	  /**
+	   * get max speed
+	   * @return
+	   */
+	  public int getMaxSpeed()
+	  {
+		  return maxSpeed;
+	  }
 }

@@ -24,6 +24,7 @@ public class Human extends LifeForm
 		super(name, points);
 		this.armPoints = (armPoints >= 0) ? armPoints : 0;
 		attachStrength = 5;
+		 maxSpeed=3;
 	}
 
 	/**

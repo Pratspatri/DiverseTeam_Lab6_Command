@@ -21,6 +21,38 @@ import weapon.Weapon;
  */ 
 public class TestLifeForm 
 { 
+	//Lab 6
+	
+		/**
+		 * Test The default direction for any lifeform is North
+		 */
+		@Test
+	 	public void testDefaultDirection()
+	 	{
+			LifeForm entity1 = new MockLifeForm("Bob", 40,5);
+			assertEquals("North",entity1.getDirection());
+	 	}
+		/**
+		 * Test that could  direction for any lifeform 
+		 */
+		@Test
+	 	public void testChangeDirection()
+	 	{
+			LifeForm entity1 = new MockLifeForm("Bob", 40,5);
+			assertEquals("North",entity1.getDirection());
+			entity1.setDirection("East");
+			assertEquals("East",entity1.getDirection());
+	 	}
+		@Test
+	 	public void testDefaultChangeMaxSpeed()
+	 	{
+			LifeForm entity1 = new MockLifeForm("Bob", 40,5);
+			assertEquals(0,entity1.getMaxSpeed());
+			entity1.setMaxSpeed(4);
+			assertEquals(4,entity1.getMaxSpeed());
+	 	}
+		
+		
   /** 
    * @author - Prathyusha Akshintala 
    * tests to track location 

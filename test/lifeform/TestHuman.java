@@ -13,6 +13,16 @@ public class TestHuman
 	/**
 	 * Test the default Strength of the Human.
 	 */
+	/**
+	 * Test the max speed for any Human is 3
+	 */
+	@Test
+	public void testDefultMaxSpeed() 
+	{ 
+		 Human human1 = new Human("Bob", 40,10); 
+		 assertEquals(3, human1.getMaxSpeed());
+	}
+	
 	@Test
 	public void testLifeStrength()
 	{

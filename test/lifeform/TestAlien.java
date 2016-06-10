@@ -14,7 +14,18 @@ import recovery.RecoveryLinear;
  * @author : Sameer Kumar Kotra
  */
 public class TestAlien
-{
+{  
+	// lab 6
+	/**
+	 * Test the max speed for any Alien is 2
+	 */
+	@Test
+	public void testDefultMaxSpeed() 
+	{ 
+		
+		 Alien a1 = new Alien("Bob", 40);
+		 assertEquals(2,a1.getMaxSpeed());
+	}
 
 	/**
 	 * Test the default Strength of the Alien.
