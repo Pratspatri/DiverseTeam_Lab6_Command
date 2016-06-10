@@ -83,13 +83,6 @@ public class SimpleTimer extends Thread implements Timer
 	{
 		return round;
 	}
-	/**
-	 * 
-	 */
-	public void setRound(int round)
-	{
-		this.round=round;
-	}
 
 	/**
 	 * @return the clone of the observerList.

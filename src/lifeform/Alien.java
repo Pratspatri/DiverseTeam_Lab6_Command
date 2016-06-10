@@ -1,87 +1,142 @@
-/**
- *  Name:Malak Bassam
- *  Course:CSC 561
- *  Instructor: Dr. Girard
- */
+
 package lifeform;
 
-import exceptions.MyNewException;
+import exceptions.RecoveryException;
 import recovery.RecoveryBehavior;
-import recovery.RecoveryNone;
-/** 
- * A Alien that can hold a LifeForm.   
- */  
+
+/**
+ * This class consists members and functions related to Alien. Alien is a
+ * LifeForm.
+ * @author Sameer Kumar Kotra
+ */
 public class Alien extends LifeForm
 {
-	public int maxLifePoints=super.getCurrentLifePoints();
-	protected RecoveryBehavior recoveryBehavior;  
-	public  int recovery_rate;
-	public int recovery;
+
 	/**
-	 * Constructor1	
+	 * int to store max life points of the alien.
 	 */
-	public Alien(String name, int life) 
-	{ 
-	
-		super(name, life,10);
-		recovery=0;
-		recoveryBehavior= new RecoveryNone();
-		maxSpeed=2;
-	}
+	private int maxLifePoints;
+
 	/**
-	 * Constructor2 that is different from 	Constructor1 in 
-	 * Constructor2 take recover object.
+	 * RecoveryBehaviour to store the recovary behaviour of the alien at run
+	 * time.
 	 */
-	
-	public Alien(String name, int life,RecoveryBehavior rb,int recoveryrate ) throws MyNewException 
+	private RecoveryBehavior recoveryBehavior;
+
+	/**
+	 * int to store the recovery rate of the Alien.
+	 */
+	private int recoveryRate;
+
+	/**
+	 * Create the instance of the Alien with given values.
+	 * @param name: The name of the life form.
+	 * @param points : The current starting life points of the life form.
+	 */
+	public Alien(String name, int points)
 	{
-		super();
-		maxSpeed=2;
-		if (recoveryrate<0) {    
-			throw new MyNewException("The recovery rate must be > or = 0");
-	
-		}
-		if(recoveryrate>=0)
-		{   this.myName=name;
-		    this.currentLifePoints=life;
-		    this.attacks_strength=10;
-		    recoveryBehavior= rb;
-		    recovery_rate=recoveryrate;
-		    maxLifePoints=this.getCurrentLifePoints();
-		}
-		
-		
+		super(name, points);
+		maxLifePoints = currentLifePoints;
+		recoveryBehavior = null;
+		attachStrength = 10;
 	}
-	public void setRecoveryRate(int rate)
+
+	/**
+	 * Create the instance of the Alien with given values.
+	 * @param name: The name of the life form.
+	 * @param points : The current starting life points of the life form.
+	 * @param rb : Recovery behavior of the Alien.
+	 */
+	public Alien(String name, int points, RecoveryBehavior rb)
 	{
-		recovery_rate=rate;
+		this(name, points);
+		recoveryBehavior = rb;
 	}
+
+	/**
+	 * Create the instance of the Alien with given values.
+	 * @param name: The name of the life form.
+	 * @param points : The current starting life points of the life form.
+	 * @param rb : Recovery behavior of the Alien.
+	 * @param recoveryRate : Rate at with alien recovers.
+	 * @throws RecoveryException : If recovery rate is less than 0.
+	 */
+	public Alien(String name, int points, RecoveryBehavior rb, int recoveryRate) throws RecoveryException
+	{
+		this(name, points, rb);
+		if (recoveryRate >= 0)
+		{
+			this.recoveryRate = recoveryRate;
+		}
+		else
+		{
+			throw new RecoveryException("Recovery Rate can not be less than 0");
+		}
+
+	}
+
+	/**
+	 * Sets the life point sof the Alien. Used for the recovery of the Alien.
+	 * @param lifePoints : New life points to be stored. Stores only if new life
+	 *            points is less than the max life points.
+	 */
+	public void setCurrentLifePoints(int lifePoints)
+	{
+		if (lifePoints < maxLifePoints)
+		{
+			currentLifePoints = (lifePoints >= 0) ? lifePoints : 0;
+		}
+	}
+
+	/**
+	 * Recovers the alien based on the recovery behavior stored in it.
+	 */
+	public void recover()
+	{
+		if (recoveryBehavior != null)
+		{
+			int lifePoints = recoveryBehavior.calculateRecovery(currentLifePoints, maxLifePoints);
+			setCurrentLifePoints(lifePoints);
+		}
+	}
+
+	/**
+	 * @return the recovery rate of the Alien.
+	 */
 	public int getRecoveryRate()
 	{
-		return recovery_rate;
+		return recoveryRate;
 	}
-	/**
-	 * Constructor2 that is different from 	Constructor1 in 
-	 * Constructor2 take recover object.
-	 */
-	
-	/**
-	 * After the Alien take hit points from its current life points
-	 * this method do recovery depend on type of recovery
-	 */
-    public void recover()
-    {
-    	if(recovery_rate>0)
-    {	
-	if(recovery==0 || (super.time%recovery_rate)==0 )
-	setCurrentLifePoints(recoveryBehavior.calculateRecovery(this.getCurrentLifePoints(), maxLifePoints));
-    	
-  }
-    }
-    
-    public void setCurrentLifePoints(int life)
-    {
-	   this.currentLifePoints=life;
-    }
 
-}// end Alien class
+	/**
+	 * Set the recovery rate of the alien.
+	 * @param recoveryRate : set the recoveryRate to alien recovery rate if
+	 *            greater than 0.
+	 * @throws RecoveryException : if recovery rate is less than 0.
+	 */
+	public void setRecoveryRate(int recoveryRate) throws RecoveryException
+	{
+		if (recoveryRate >= 0)
+		{
+			this.recoveryRate = recoveryRate;
+		}
+		else
+		{
+			throw new RecoveryException("Recovery Rate can not be less than 0");
+		}
+	}
+
+	/**
+	 * When the time is changed the timer notifies this method of the Observer.
+	 * @param time : updated time
+	 */
+	@Override
+	public void updateTime(int time)
+	{
+		if (recoveryRate != 0 && (time) % recoveryRate == 0)
+		{
+			recover();
+		}
+	}
+
+}

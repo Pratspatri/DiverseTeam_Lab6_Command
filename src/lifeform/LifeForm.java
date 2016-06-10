@@ -1,156 +1,202 @@
-/**
- * Team Members:Malak Bassam
- *  Course:CSC 561
- *  Instructor: Dr. Girard
- */
 package lifeform;
 
-
 import environment.Environment;
-
-import exceptions.MyNewException;
-import weapon.Weapon;
 import gameplay.TimeObserver;
+import weapon.Weapon;
 
 /**
- *  Keeps track of the information associated with a simple 
- *  life form.Also provides the functionality related to the 
- *  life form.   
- */  
+ * This class consists members and functions related to LifeForm.
+ * New methods @author - Prathyusha Akshintala
+ * Previous existing files @author : Sameer Kumar Kotra
+ */
 public abstract class LifeForm implements TimeObserver
 {
+	/**
+	 * String to store the name of the LifeForm.
+	 */
+	private String myName;
+
+	/**
+	 * int to store the life points of the LifeForm. It can be accessed by sub
+	 * classes.
+	 */
+	protected int currentLifePoints;
+
+	/**
+	 * int to store the strength of the LifeForm.
+	 */
+	protected int attachStrength;
+
+	/**
+	 * Weapon to store the weapon the LifeForm has.
+	 */
+	private Weapon weapon;
 	
- protected String myName; 
- protected int currentLifePoints;
- protected int attacks_strength;
- public int time;
- protected Weapon weapon;
- protected int maxSpeed=0;
- protected String direction="North";
- protected int trackRow;
- protected int trackCol;
- /** 
-  * Create an instance    
-  * @param name the name of the lifeForm   
-  * @param points the current starting life points of the life form   
-  */  
-   public LifeForm(String name,int points, int strength)
-   {
-	 myName=name;
-	 if(points>0)
-	 {
-	 currentLifePoints=points;
-	 }
-	 attacks_strength=strength;
-	 weapon=null;
-   }
+	/**
+	 * @author - Prathyusha Akshintala
+	 * int to track and store row coordinate
+	 */
+	private int trackRow;
+	/**
+	 * @author - Prathyusha Akshintala
+	 * int to track and store col coordinate
+	 */
+	private int trackCol;
 
-  /**
-   * Constructor 2
-   */
-   public LifeForm()
-   {
-   }
-   
- /** 
-  * @return the name of the lifeForm.    
-  */  
-   public String getName()  
-   {  
-      return myName;  
-   }  
-
-/**
- * Return the current lifeForm 
- */
-   public int getCurrentLifePoints()  
-   {  
-     return currentLifePoints;  
-   }  
-   
-   /**
-    * Take some points from currentlifePoints.
-    */
-  public void takeHit(int damage)
-  {
-	  if(currentLifePoints>damage)
-	  {
-		  currentLifePoints=currentLifePoints- damage;
-	  }
-	  else
-		  currentLifePoints=0;  
-  
-  }
-  /**
-   * Allow one lifeform attacks another either with weapon or not
-   * @param attacks_strength
-   * @throws MyNewException 
-   */
-  public void attack(LifeForm lifeform) throws MyNewException
-  {  
-	  int distance=Environment.getWorldInstance().getDistance(this,lifeform);
-	if(this.getCurrentLifePoints() !=0 && lifeform.getCurrentLifePoints()!=0)
+	/**
+	 * Modified existing method - @author - Prathyusha Akshintala
+	 * Create an instance of LifeForm with given values.
+	 * @param name: The name of the life form.
+	 * @param points :The current starting life points of the life form.
+	 */
+	public LifeForm(String name, int points)
 	{
-		if(distance<=5 && (this.weapon==null || this.weapon.getActualAmmo()==0))
-		  {   
-		  if(lifeform.currentLifePoints>0)
-			  
-			 lifeform.takeHit(getAttack());
-		  }
-		  else if  (this.weapon.getActualAmmo()>0 && distance<=this.weapon.getMaxRange())
-		  {
-			  lifeform.currentLifePoints=lifeform.currentLifePoints-this.weapon.calculateDamage(distance);
-		  }  
+		myName = name;
+		currentLifePoints = (points >= 0) ? points : 0;
+		attachStrength = 0;
+		weapon = null;
+		trackRow = -1;
+		trackCol = -1;
 	}
-	  
-  }
-  
-  /**
-   * @return strength 
-   */
-  public int getAttack()
-  {
- return attacks_strength;
-  }
-  /**
-   * To set new value for strength
-   */
-  public void setAttack(int att)
-  {
-   this.attacks_strength=att;
-  }
-  /**
-   * To update time
-   */
-  public void updateTime(int time)
-  {
-	 this.time=time;
-  }
-  /**
-   * Lifeform can pickup a weapon
-   */
-  public void pickup(Weapon weap)
-  {
- 	if(this.weapon==null)
- 	{
-  this.weapon=weap;
- 	}
 
-  }
-  /**
-   * Lifeform can drop a weapon
-   */
-  public void drop()
-  {
- 	this.weapon=null;
-  }
-  
-  public void setLocaleXY(int row, int col) 
+	/**
+	 * Create an instance of LifeForm with given values.
+	 * @param name: The name of the life form.
+	 * @param points : The current starting life points of the life form.
+	 * @param strength: The Strength of the LifeForm.
+	 */
+	public LifeForm(String name, int points, int strength)
+	{
+		this(name, points);
+		this.attachStrength = (strength >= 0) ? strength : 0;
+	}
+
+	/**
+	 * Returns the name of the LifeForm.
+	 * @return the name of the life form.
+	 */
+	public String getName()
+	{
+		return myName;
+	}
+
+	/**
+	 * Returns the current life points of a LifeForm.
+	 * @return the amount of current life points the life form has.
+	 */
+	public int getCurrentLifePoints()
+	{
+		return currentLifePoints;
+	}
+
+	/**
+	 * Reduces the damage from current life points.
+	 * @param damage : specifies the damage to the LifeForm.
+	 */
+	public void takeHit(int damage)
+	{
+		if (damage > 0)
+		{
+			currentLifePoints -= damage;
+			currentLifePoints = (currentLifePoints >= 0) ? currentLifePoints : 0;
+		}
+	}
+
+	/**
+	 * Returns the strength of a LifeForm.
+	 * @return the strength the life form has.
+	 */
+	public int getAttachStrength()
+	{
+		return attachStrength;
+	}
+
+	/**
+	 * Modified existing method @author - Prathyusha Akshintala
+	 * Used to attack a LifeForm.
+	 * lifeForm1.attack(lifeForm2).
+	 * lifeForm1:attacker.
+	 * lifeForm2:attacked.
+	 * @param lifeForm2 : It is attached by the calling LifeForm.
+	 */
+	public void attack(LifeForm lifeForm2)
+	{
+		Environment environ = Environment.getWorldInstance();
+		int distance = environ.getDistance(this, lifeForm2);
+		if (getCurrentLifePoints() > 0)
+		{
+			if (weapon == null || weapon.getActualAmmo() == 0)
+			{
+				if (distance <= 10)
+				{
+					lifeForm2.takeHit(getAttachStrength());
+				}
+			}
+			else
+			{
+				lifeForm2.takeHit(weapon.fire(distance));
+			}
+		}
+	}
+
+	/**
+	 * When the time is changed the timer notifies this method of the Observer.
+	 * It performs nothing in here.
+	 * @param time : updated time
+	 */
+	@Override
+	public void updateTime(int time)
+	{
+	}
+
+	/**
+	 * Pickup the Weapon.
+	 * @param weapon : The weapon to be picked up.
+	 */
+	public void pickUp(Weapon weapon)
+	{
+		if (this.weapon == null)
+		{
+			this.weapon = weapon;
+		}
+	}
+
+	/**
+	 * @return the weapon the LifeForm has.
+	 */
+	public Weapon getWeapon()
+	{
+		return weapon;
+	}
+
+	/**
+	 * Drops the weapon the LifeForm has.
+	 */
+	public void dropWeapon()
+	{
+		weapon = null;
+	}
+
+	/**
+	 * Reloads the weapon the lifeForm has.
+	 */
+	public void reload()
+	{
+		weapon.relod();
+	}
+	/**
+	 * @author - Prathyusha Akshintala
+	 * Sets the locale with respect to coordinates
+	 * @param row
+	 * @param col
+	 */
+	public void setLocaleXY(int row, int col) 
 	{
 		this.trackRow = row;
 		this.trackCol = col;
 	}
 	/**
+	 * @author - Prathyusha Akshintala
 	 * Removes and resets the location given with respect to coordinates
 	 */
 	public void removeLocaleXY() 
@@ -159,6 +205,7 @@ public abstract class LifeForm implements TimeObserver
 		this.trackCol = -1;
 	}
 	/**
+	 * @author - Prathyusha Akshintala
 	 * @return - the row coordinate
 	 */
 	public int getRowTrack() 
@@ -166,43 +213,12 @@ public abstract class LifeForm implements TimeObserver
 		return this.trackRow;
 	}
 	/**
+	 * @author - Prathyusha Akshintala
 	 * @return - the col coordinate
 	 */
 	public int getColTrack() 
 	{
 		return this.trackCol;
 	}
- /**
-  * Change the direction for Lifeform
-  */
-  public void setDirection(String direction)
-  {
-	  this.direction=direction;
-  }
-  /**
-   * Get Direction for lifeform
-   * @return
-   */
-  public String getDirection()
-  {
-	  return direction;
-  }
-  /**
-   * Set MaxSpeed for life form
-   * @param maxSpeed
-   */
-  public void setMaxSpeed(int maxSpeed)
-  {
-	  this.maxSpeed=maxSpeed;
-  }
-  /**
-   * Get Max speed for lifeform
-   * @return
-   */
-  public int getMaxSpeed()
-  {
-	  return maxSpeed;
-  }
-} // end the class LifeForm
 
-
+}
