@@ -5,11 +5,25 @@ package ui;
  */
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+
+import weapon.Attachment;
+import weapon.ChainGun;
+import weapon.Pistol;
+import weapon.PlasmaCannon;
+import weapon.Weapon;
+import environment.Environment;
+
 import java.awt.Color;
+
+import lifeform.Alien;
+import lifeform.Human;
+import lifeform.LifeForm;
 
 public class GameDisplay 
 {
@@ -18,7 +32,9 @@ public class GameDisplay
 	 */
 	private JFrame frame;
 	private JPanel legend, map;
-
+	private JLabel displayArray[][];
+	private int row,col;
+	private final String DEFAULTFORMAT="_|__|_|__|__|";  
 	/**
 	 * Launch the application.
 	 */
@@ -33,7 +49,129 @@ public class GameDisplay
 	 */
 	public GameDisplay() 
 	{
+		row=8;
+		col=8;
+		displayArray=new JLabel[row][col];
+		for(int i=0;i<row;i++)
+		{
+			for(int j=0;j<col;j++)
+			{
+				displayArray[i][j]=new JLabel(DEFAULTFORMAT);
+			}
+		}
 		initialize();
+		//Environment env = Environment.getWorldInstance();
+		//LifeForm l1 = new Human("Bob",50,10);
+		//env.addLifeForm(4, 4, l1);
+		update();
+	}
+	/**
+	 * Update method to get updates from Environment and display on the map
+	 */
+	public void update() 
+	{
+		Environment envin = Environment.getWorldInstance();
+		LifeForm l1;
+		Weapon w1;
+		String temp="";
+		for(int i=0; i<8; i++)
+		{
+			for(int j=0; j<8; j++)
+			{
+				temp="";
+				l1 = envin.getLifeForm(i, j);
+				if(l1 != null)
+				{
+					if(l1 instanceof Human)
+					{
+						temp+="H|";
+					}
+					else if(l1 instanceof Alien)
+					{
+						temp+="A|";
+					}
+					w1 =getWeapon(l1.getWeapon());
+					if(w1 != null)
+					{
+						if(w1 instanceof Pistol)
+						{
+							temp+="P|";
+						}
+						else if(w1 instanceof PlasmaCannon)
+						{
+							temp+="PC|";
+						}
+						else if(w1 instanceof ChainGun)
+						{
+							temp+="CG|";
+						}
+					}
+					else
+					{
+						temp+="__|";
+					}
+					/**
+					 * get the direction from Malak and set it as above
+					 * switch(//TODO get direction from Malak - l1.getdirection())
+					 */
+					temp+="_|";
+				}
+				else
+				{
+					temp+="_|__|_|";
+				}
+				w1 =getWeapon(envin.getWeapon(j, j, 1));
+				if(w1 != null)
+				{
+					if(w1 instanceof Pistol)
+					{
+						temp+="P|";
+					}
+					else if(w1 instanceof PlasmaCannon)
+					{
+						temp+="PC|";
+					}
+					else if(w1 instanceof ChainGun)
+					{
+						temp+="CG|";
+					}
+				}
+				else
+				{
+					temp+="__|";
+				}
+				w1 =getWeapon(envin.getWeapon(j, j, 2));
+				if(w1 != null)
+				{
+					if(w1 instanceof Pistol)
+					{
+						temp+="P|";
+					}
+					else if(w1 instanceof PlasmaCannon)
+					{
+						temp+="PC|";
+					}
+					else if(w1 instanceof ChainGun)
+					{
+						temp+="CG|";
+					}
+				}
+				else
+				{
+					temp+="__|";
+				}
+				displayArray[i][j].setText(temp);			
+			}
+		}
+	}
+
+	private Weapon getWeapon(Weapon weapon) 
+	{
+		while(weapon instanceof Attachment)
+		{
+			weapon = ((Attachment)weapon).getWeapon();
+		}
+		return weapon;
 	}
 
 	/**
@@ -69,7 +207,16 @@ public class GameDisplay
 		
 		JPanel Environment = new JPanel();
 		map.add(Environment, BorderLayout.CENTER);
-		Environment.setLayout(new GridLayout(1, 0, 0, 0));
+		Environment.setLayout(new GridLayout(8, 8, 0, 0));
+		LineBorder border=new LineBorder(new Color(0, 0, 0), 1, true);
+		for(int i=0;i<row;i++)
+		{
+			for(int j=0;j<col;j++)
+			{
+				displayArray[i][j].setBorder(border);
+				Environment.add(displayArray[i][j]);
+			}
+		}
 		
 	}
 	

@@ -103,7 +103,7 @@ public class Environment
 	{
 		if (theWorld == null)
 		{
-			theWorld = new Environment (5,5);
+			theWorld = new Environment (8,8);
 		}
 		return theWorld;
 	}
@@ -147,6 +147,22 @@ public class Environment
 			return null;
 		}
 	}
+	/**
+	 * @author - Prathyusha Akshintala
+	 * Method to get a weapon at the given location from a position.
+	 */
+	/*public Weapon getWeapon(int row, int col, int position)
+	{
+		if (row < cells.length && col < cells[row].length)
+		{
+			return (cells[row][col].getWeapon(position));
+		}
+		else
+		{
+			return null;
+		}
+	}*/
+	
 	/**
 	 * @author - Prathyusha Akshintala
 	 * Method to get distance between two LifeForms.

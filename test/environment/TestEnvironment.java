@@ -364,9 +364,9 @@ public class TestEnvironment
 		assertTrue(environ1.addWeapon(1, 2, w1, 1));
 		assertTrue(environ1.addWeapon(1, 2, w2, 2));
 		// Border Cases - outside the range
-		assertFalse(environ1.addWeapon(6, 5, w1, 1));
-		assertFalse(environ1.addWeapon(5, 6, w2, 2));
-		assertFalse(environ1.addWeapon(8, 8, w1, 1));
+		assertFalse(environ1.addWeapon(9, 8, w1, 1));
+		assertFalse(environ1.addWeapon(8, 9, w2, 2));
+		assertFalse(environ1.addWeapon(9, 9, w1, 1));
 	}
 	/**
 	 * @author - Prathyusha Akshintala
@@ -384,9 +384,9 @@ public class TestEnvironment
 		assertEquals(w1,environ1.removeWeapon(1, 2, 1));
 		assertEquals(w2,environ1.removeWeapon(1, 2, 2));
 		// Border Cases - outside the range
-		assertNull(environ1.removeWeapon(6, 5, 1));
-		assertNull(environ1.removeWeapon(5, 6, 2));
-		assertNull(environ1.removeWeapon(8, 8, 1));
+		assertNull(environ1.removeWeapon(9, 8, 1));
+		assertNull(environ1.removeWeapon(8, 9, 2));
+		assertNull(environ1.removeWeapon(9, 9, 1));
 	}
 	/**
 	 * Tests the distance between the LifeForms.
@@ -449,12 +449,12 @@ public class TestEnvironment
 		Environment environment = Environment.getWorldInstance();
 		LifeForm bob = new MockLifeForm("Bob", 40);
 
-		// Can not add at location 2,0 as rows exceed size
-		boolean success = environment.addLifeForm(6, 0, bob);
+		// Can not add at location 9,0 as rows exceed size
+		boolean success = environment.addLifeForm(9, 0, bob);
 		assertFalse(success);
 
-		// Can not add at location 0,2 as column exceed size
-		success = environment.addLifeForm(0, 6, bob);
+		// Can not add at location 0,9 as column exceed size
+		success = environment.addLifeForm(0, 9, bob);
 		assertFalse(success);
 
 	}
