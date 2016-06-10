@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import lifeform.LifeForm;
 import lifeform.MockLifeForm;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,7 +27,15 @@ public class TestDropCommand
 	 * Clear all the LifeForms and Weapons in the Environment before each test. 
 	 */
 	@Before
-	public void resetEnvironment()
+	public void resetEnvironmentBefore()
+	{
+		Environment.resetInstance();
+	}
+	/**
+	 * Clear all the LifeForms and Weapons in the Environment after each test.
+	 */
+	@After
+	public void resetEnvironmentAfter()
 	{
 		Environment.resetInstance();
 	}
