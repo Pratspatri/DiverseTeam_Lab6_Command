@@ -186,4 +186,19 @@ public class Environment
 		}
 		return -1;
 	}
+	
+	/**
+	 * Gets the Weapon[postion] at cell[row][col].
+	 * If there is no Weapon, return null.
+	 * 
+	 * @author Jixiang Lu
+	 * @param row the row of the Cells
+	 * @param col the column of the Cells
+	 * @param position the position of Weapon in the Cell
+	 * @return the Weapon[positon] at this Cell, otherwise return null
+	 */
+	public Weapon getWeapon(int row, int col, int position)
+	{
+		return cells[row][col].getWeapon(position);
+	}
 }
