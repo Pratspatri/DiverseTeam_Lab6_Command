@@ -121,4 +121,9 @@ public abstract class Attachment implements Weapon
 		return weapon.calculateDamage(distence);
 	}
 
+	//TODO
+	public Weapon getWeapon()
+	{
+		return weapon;
+	}
 }
