@@ -60,9 +60,20 @@ public class GameDisplay
 			}
 		}
 		initialize();
-		//Environment env = Environment.getWorldInstance();
-		//LifeForm l1 = new Human("Bob",50,10);
-		//env.addLifeForm(4, 4, l1);
+		/**
+		 * just to see if everything needed is displayed correctly
+		 */
+		Environment env = Environment.getWorldInstance();
+		LifeForm l1 = new Human("Bob",50,10);
+		env.addLifeForm(4, 4, l1);
+		l1.setDirection("north");
+		PlasmaCannon cannon = new PlasmaCannon();
+		l1.pickUp(cannon);
+		/*Environment env1 = Environment.getWorldInstance();
+		Pistol pistol = new Pistol();
+		ChainGun gun = new ChainGun();*/
+		/*env1.addWeapon(4, 2, pistol, 1);
+		env1.addWeapon(4, 2, gun, 2);*/
 		update();
 	}
 	/**
@@ -73,6 +84,7 @@ public class GameDisplay
 		Environment envin = Environment.getWorldInstance();
 		LifeForm l1;
 		Weapon w1;
+		String dir;
 		String temp="";
 		for(int i=0; i<8; i++)
 		{
@@ -114,6 +126,30 @@ public class GameDisplay
 					 * get the direction from Malak and set it as above
 					 * switch(//TODO get direction from Malak - l1.getdirection())
 					 */
+					dir = l1.getDirection();
+					if(dir != null)
+					{
+						if(dir == "north")
+						{
+							temp+="n|";
+						}
+						else if(dir == "south")
+						{
+							temp+="s|";
+						}
+						else if(dir == "east")
+						{
+							temp+="e|";
+						}
+						else if(dir == "west")
+						{
+							temp+="w|";
+						}
+					}
+					else
+					{
+						temp+="_|";
+					}
 					temp+="_|";
 				}
 				else
