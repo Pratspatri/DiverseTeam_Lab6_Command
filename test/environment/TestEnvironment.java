@@ -17,17 +17,15 @@ import lifeform.LifeForm;
 import lifeform.MockLifeForm;
 
 /**
- * The test cases for the Environment class. 
- * New tests @author - Malak Bassam
+ * The test cases for the Environment class. New tests @author - Malak Bassam
  * Previous existing tests @author : Prathyusha Akshintala
  */
-public class TestEnvironment
-{  /**
-    *Reset the static variable
-    */
+public class TestEnvironment {
+	/**
+	 * Reset the static variable
+	 */
 	@After
-	public void after() 
-	{
+	public void after() {
 		Environment.resetInstance();
 	}
 
@@ -36,17 +34,15 @@ public class TestEnvironment
 	 * correctly North with obstacles
 	 */
 	@Test
-	public void testMoveNorthHuman() {
+	public void testMoveNorthHuman() 
+	{
 		Environment env = Environment.getWorldInstance();
 		// move without obstacles
 		Human human1 = new Human("Bob", 40, 10);
 		assertTrue(env.addLifeForm(4, 0, human1));
-		System.out.println(human1.getRowTrack());
-		System.out.println(human1.getColTrack());
 		env.move(human1);
 		assertEquals(1, human1.getRowTrack());
 		assertEquals(0, human1.getColTrack());
-		
 		// can move just one cell because there is obstacles which is not all
 		// cells are full
 		Human human2 = new Human("fred", 40, 10);
@@ -58,24 +54,27 @@ public class TestEnvironment
 		// cannot move there is obstacles which is all cells are full
 		Human human3 = new Human("fred", 40, 10);
 		Human human4 = new Human("fred", 40, 10);
+		Human human5 = new Human("fred", 40, 10);
 		assertTrue(env.addLifeForm(3, 0, human3));
 		assertTrue(env.addLifeForm(4, 0, human4));
+		assertTrue(env.addLifeForm(5, 0, human5));
 		env.move(human4);
 		assertEquals(4, human4.getRowTrack());
 		assertEquals(0, human4.getColTrack());
-		
+
 	}
+
 	/**
 	 * Test Alien Moves correctly East without obstacles Test Alien Moves
 	 * correctly East with obstacles
 	 */
 	@Test
-	public void testMoveEastAlien() {
+	public void testMoveEastAlien() 
+	{
 		Environment env = Environment.getWorldInstance();
 		Alien a1 = new Alien("Bob", 40);
-		Alien a2 = new Alien("Fred", 60);
+		Alien a22 = new Alien("Fred", 60);
 		Alien a3 = new Alien("Lez", 40);
-		;
 		// There is no obstacles ,so can move
 		assertTrue(env.addLifeForm(4, 1, a1));
 		a1.setDirection("East");
@@ -85,22 +84,18 @@ public class TestEnvironment
 		assertNull(env.getLifeForm(4, 1));
 		// there is an obstacle which is not all cells are full, can move just
 		// one cell
-		env.move(a1);
-		assertEquals(4, a1.getRowTrack());
-		assertEquals(4, a1.getColTrack());
-		assertNull(env.getLifeForm(4, 3));
-		assertTrue(env.addLifeForm(4, 2, a2));
-		a2.setDirection("East");
-		env.move(a2);
-		assertEquals(4, a2.getRowTrack());
-		assertEquals(3, a2.getColTrack());
-		assertNull(env.getLifeForm(4, 2));
+		assertTrue(env.addLifeForm(4, 1, a22));
+		a22.setDirection("East");
+		env.move(a22);
+		assertEquals(4, a22.getRowTrack());
+		assertEquals(2, a22.getColTrack());
+		assertNull(env.getLifeForm(4, 0));
 		// there is obstacle which all cells are full, cannot move
-		assertTrue(env.addLifeForm(4, 2, a3));
+		assertTrue(env.addLifeForm(4, 1, a3));
 		a3.setDirection("East");
 		env.move(a3);
 		assertEquals(4, a3.getRowTrack());
-		assertEquals(2, a3.getColTrack());
+		assertEquals(1, a3.getColTrack());
 	}
 
 	/**
@@ -108,7 +103,8 @@ public class TestEnvironment
 	 * correctly South with obstacles
 	 */
 	@Test
-	public void testMoveSouthHuman() {
+	public void testMoveSouthHuman() 
+	{
 		Environment env = Environment.getWorldInstance();
 		Human human1 = new Human("fred", 40, 10);
 		Human human2 = new Human("Bob", 40, 10);
@@ -131,18 +127,20 @@ public class TestEnvironment
 		assertEquals(3, human2.getColTrack());
 		// There is obstacles which is not all cells are full, can move just one
 		// cell
-		env.move(human1);
-		assertEquals(4, human1.getRowTrack());
-		assertEquals(3, human1.getColTrack());
-		assertNull(env.getLifeForm(3, 3));
+		human3.setDirection("South");
+		env.move(human3);
+		assertEquals(4, human3.getRowTrack());
+		assertEquals(3, human3.getColTrack());
+		assertNull(env.getLifeForm(1, 3));
 	}
-	
+
 	/**
 	 * Test Alien Moves correctly West without obstacles Test Alien Moves
 	 * correctly West with obstacles
 	 */
 	@Test
-	public void testMoveWestAlien() {
+	public void testMoveWestAlien() 
+	{
 		Environment env = Environment.getWorldInstance();
 
 		Alien a1 = new Alien("Bob", 40);
@@ -180,7 +178,8 @@ public class TestEnvironment
 	 * correctly North with obstacles
 	 */
 	@Test
-	public void testMoveNorthAlien() {
+	public void testMoveNorthAlien() 
+	{
 		Environment env = Environment.getWorldInstance();
 		Alien a1 = new Alien("Bob", 40);
 		Alien a2 = new Alien("Fred", 60);
@@ -213,7 +212,8 @@ public class TestEnvironment
 	 * correctly East with obstacles
 	 */
 	@Test
-	public void testMoveEastHuman() {
+	public void testMoveEastHuman() 
+	{
 		Environment env = Environment.getWorldInstance();
 		Human human1 = new Human("fred", 40, 10);
 		Human human2 = new Human("Bob", 40, 10);
@@ -249,7 +249,8 @@ public class TestEnvironment
 	 * correctly South with obstacles
 	 */
 	@Test
-	public void testMoveSouthAlien() {
+	public void testMoveSouthAlien() 
+	{
 		Environment env = Environment.getWorldInstance();
 		Alien a1 = new Alien("Bob", 40);
 		Alien a2 = new Alien("Fred", 60);
@@ -285,7 +286,8 @@ public class TestEnvironment
 	 * correctly West with obstacles
 	 */
 	@Test
-	public void testMoveWestHuman() {
+	public void testMoveWestHuman() 
+	{
 		Environment env = Environment.getWorldInstance();
 		Human human1 = new Human("fred", 40, 10);
 		Human human2 = new Human("Bob", 40, 10);
@@ -317,45 +319,46 @@ public class TestEnvironment
 		assertEquals(2, human1.getRowTrack());
 		assertEquals(0, human1.getColTrack());
 	}
+
 	/**
-	 * @author - Prathyusha Akshintala
-	 * Test the initialization of the Environment.
+	 * @author - Prathyusha Akshintala Test the initialization of the
+	 *         Environment.
 	 */
 	@Test
-	public void testInitialization()
+	public void testInitialization() 
 	{
 		Environment environ1 = Environment.getWorldInstance();
-		
+
 		// Life form will be null for a newly created Environment.
 		assertNull(environ1.getLifeForm(0, 0));
 		assertNull(environ1.getLifeForm(1, 1));
-		
+
 		Environment environ2 = Environment.getWorldInstance();
-		assertEquals (environ1, environ2);
+		assertEquals(environ1, environ2);
 	}
 
 	/**
 	 * Test getWeapon() method.
+	 * 
 	 * @author Jixiang Lu.
 	 */
 	@Test
-	public void testGetWeapon()
+	public void testGetWeapon() 
 	{
 		Environment env = Environment.getWorldInstance();
 		Weapon w1 = new PlasmaCannon();
 		Weapon w2 = new Pistol();
 		env.addWeapon(0, 0, w1, 1);
 		env.addWeapon(0, 0, w2, 2);
-		assertEquals(w1,env.getWeapon(0, 0, 1));
-		assertEquals(w2,env.getWeapon(0, 0, 2));
+		assertEquals(w1, env.getWeapon(0, 0, 1));
+		assertEquals(w2, env.getWeapon(0, 0, 2));
 	}
-	
+
 	/**
-	 * @author - Prathyusha Akshintala
-	 * Tests to add weapon from a given location
+	 * @author - Prathyusha Akshintala Tests to add weapon from a given location
 	 */
 	@Test
-	public void addWeapon()
+	public void addWeapon() 
 	{
 		Environment environ1 = Environment.getWorldInstance();
 		Weapon w1 = new PlasmaCannon();
@@ -368,9 +371,10 @@ public class TestEnvironment
 		assertFalse(environ1.addWeapon(8, 9, w2, 2));
 		assertFalse(environ1.addWeapon(9, 9, w1, 1));
 	}
+
 	/**
-	 * @author - Prathyusha Akshintala
-	 * Tests to remove weapon from a given location
+	 * @author - Prathyusha Akshintala Tests to remove weapon from a given
+	 *         location
 	 */
 	@Test
 	public void removeWeapon()
@@ -381,18 +385,19 @@ public class TestEnvironment
 		// Add weapons to the cell (1,2)
 		environ1.addWeapon(1, 2, w1, 1);
 		environ1.addWeapon(1, 2, w2, 2);
-		assertEquals(w1,environ1.removeWeapon(1, 2, 1));
-		assertEquals(w2,environ1.removeWeapon(1, 2, 2));
+		assertEquals(w1, environ1.removeWeapon(1, 2, 1));
+		assertEquals(w2, environ1.removeWeapon(1, 2, 2));
 		// Border Cases - outside the range
 		assertNull(environ1.removeWeapon(9, 8, 1));
 		assertNull(environ1.removeWeapon(8, 9, 2));
 		assertNull(environ1.removeWeapon(9, 9, 1));
 	}
+
 	/**
 	 * Tests the distance between the LifeForms.
 	 */
 	@Test
-	public void testDistance()
+	public void testDistance() 
 	{
 		Environment environ1 = Environment.getWorldInstance();
 		LifeForm harry = new MockLifeForm("Harry", 35);
@@ -402,7 +407,7 @@ public class TestEnvironment
 		environ1.addLifeForm(1, 2, ron);
 		environ1.addLifeForm(4, 2, dobby);
 
-		// If the lifeforms are in the same row.	
+		// If the lifeforms are in the same row.
 		assertEquals(10, environ1.getDistance(harry, ron));
 		// If the lifeforms are in the same column.
 		assertEquals(15, environ1.getDistance(ron, dobby));
@@ -410,16 +415,15 @@ public class TestEnvironment
 		assertEquals(18, environ1.getDistance(harry, dobby));
 
 		environ1.removeLifeForm(1, 2);
-//		assertEquals(-1, environ1.getDistance(harry, ron));
-//		assertEquals(-1, environ1.getDistance(ron, dobby));
+		assertEquals(-1, environ1.getDistance(harry, ron));
+		assertEquals(-1, environ1.getDistance(ron, dobby));
 	}
 
 	/**
-	 * Old tests
-	 * Test the setting of LifeFrom in the Environment.
+	 * Old tests Test the setting of LifeFrom in the Environment.
 	 */
 	@Test
-	public void testSetLifeForm()
+	public void testSetLifeForm() 
 	{
 		Environment environment = Environment.getWorldInstance();
 		LifeForm bob = new MockLifeForm("Bob", 40);
@@ -444,7 +448,7 @@ public class TestEnvironment
 	 * Test the border conditions while adding the LifeFrom to Environment.
 	 */
 	@Test
-	public void testBorderConditions()
+	public void testBorderConditions() 
 	{
 		Environment environment = Environment.getWorldInstance();
 		LifeForm bob = new MockLifeForm("Bob", 40);
@@ -456,14 +460,13 @@ public class TestEnvironment
 		// Can not add at location 0,9 as column exceed size
 		success = environment.addLifeForm(0, 9, bob);
 		assertFalse(success);
-
 	}
 
 	/**
 	 * Test the removing of LifeFrom from the Environment.
 	 */
 	@Test
-	public void testRemoveLifeForm()
+	public void testRemoveLifeForm() 
 	{
 		Environment environment = Environment.getWorldInstance();
 		LifeForm bob = new MockLifeForm("Bob", 40);
@@ -472,26 +475,27 @@ public class TestEnvironment
 		boolean success = environment.addLifeForm(1, 2, bob);
 		assertTrue(success);
 		// Life form is not added at location 1,4 so it should fail.
-				assertNull(environment.removeLifeForm(1, 1));
+		assertNull(environment.removeLifeForm(1, 1));
 
-				// Location out of range so it should return null
-				assertNull(environment.removeLifeForm(2, 3));
+		// Location out of range so it should return null
+		assertNull(environment.removeLifeForm(2, 3));
 
-				// Location out of range so it should return null
-				assertNull(environment.removeLifeForm(1, 3));
+		// Location out of range so it should return null
+		assertNull(environment.removeLifeForm(1, 3));
 
-				// Location out of range so it should return null
-				assertNull(environment.removeLifeForm(2, 1));
+		// Location out of range so it should return null
+		assertNull(environment.removeLifeForm(2, 1));
 		// Life form is added do it should work.
-		//assertEquals(bob, environment.removeLifeForm(1, 2));
+		 assertEquals(bob, environment.removeLifeForm(1, 2));
 	}
+
 	/**
-	 * @author - Prathyusha Akshintala
-	 * Reset environment method is used for other tests.
+	 * @author - Prathyusha Akshintala Reset environment method is used for
+	 *         other tests.
 	 */
 	public static void resetEnvironment()
 	{
 		Environment.resetInstance();
 	}
-	
+
 }

@@ -22,7 +22,6 @@ public class TestAlien
 	@Test
 	public void testDefultMaxSpeed() 
 	{ 
-		
 		 Alien a1 = new Alien("Bob", 40);
 		 assertEquals(2,a1.getMaxSpeed());
 	}

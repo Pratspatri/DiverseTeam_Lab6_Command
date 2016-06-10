@@ -6,8 +6,8 @@ import weapon.Weapon;
 
 /**
  * This class consists members and functions related to LifeForm.
- * New methods @author - Prathyusha Akshintala
- * Previous existing files @author : Sameer Kumar Kotra
+ * New methods @author - Malak Bassam
+ * Previous existing files @author : Prathyusha Akshintala
  */
 public abstract class LifeForm implements TimeObserver
 {
@@ -44,9 +44,12 @@ public abstract class LifeForm implements TimeObserver
 	private int trackCol;
 
 	/**
-	 * Max speed and direction for lifeform
+	 * Max speed let life form move per round
 	 */
 	 protected int maxSpeed=0;
+	 /**
+	  * Set Direction for each life form
+	  */
 	 protected String direction="North";
 	/**
 	 * Modified existing method - @author - Prathyusha Akshintala
@@ -227,7 +230,9 @@ public abstract class LifeForm implements TimeObserver
 	{
 		return this.trackCol;
 	}
+	
 	/**
+	 * @author - Malak Bassam
 	 * Change the direction for life form
 	 * @param direction
 	 */
@@ -235,7 +240,9 @@ public abstract class LifeForm implements TimeObserver
 	  {
 		  this.direction=direction;
 	  }
+	  
 	  /**
+	   *  @author - Malak Bassam
 	   * get Direction for any life form
 	   * @return  direction 
 	   */
@@ -243,15 +250,19 @@ public abstract class LifeForm implements TimeObserver
 	  {
 		  return direction;
 	  }
+	  
 	  /**
-	   * Set Max speed
+	   * @author - Malak Bassam
+	   * Set Max speed which how fast should life form move per round
 	   * @param maxSpeed
 	   */
 	  public void setMaxSpeed(int maxSpeed)
 	  {
 		  this.maxSpeed=maxSpeed;
 	  }
+	  
 	  /**
+	   * @author - Malak Bassam
 	   * get max speed
 	   * @return
 	   */
