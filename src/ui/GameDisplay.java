@@ -61,19 +61,29 @@ public class GameDisplay
 		}
 		initialize();
 		/**
-		 * just to see if everything needed is displayed correctly
+		 * Mock initialization check to just to see if everything needed is displayed correctly
 		 */
 		Environment env = Environment.getWorldInstance();
 		LifeForm l1 = new Human("Bob",50,10);
+		LifeForm m1 = new Human("Mon",50,10);
 		env.addLifeForm(4, 4, l1);
+		env.addLifeForm(1, 2, m1);
 		l1.setDirection("north");
 		PlasmaCannon cannon = new PlasmaCannon();
 		l1.pickUp(cannon);
-		/*Environment env1 = Environment.getWorldInstance();
 		Pistol pistol = new Pistol();
-		ChainGun gun = new ChainGun();*/
-		/*env1.addWeapon(4, 2, pistol, 1);
-		env1.addWeapon(4, 2, gun, 2);*/
+		ChainGun gun = new ChainGun();
+		env.addWeapon(4, 2, pistol, 1);
+		env.addWeapon(4, 7, gun, 2);
+		
+		LifeForm A1 = new Alien("Jadoo",80);
+		LifeForm C1 = new Alien("Chan",80);
+		env.addLifeForm(7, 7, A1);
+		env.addLifeForm(2, 5, C1);
+		Pistol p1 = new Pistol();
+		A1.pickUp(p1);
+		PlasmaCannon pc = new PlasmaCannon();
+		env.addWeapon(6, 5, pc, 1);
 		update();
 	}
 	/**
@@ -123,8 +133,7 @@ public class GameDisplay
 						temp+="__|";
 					}
 					/**
-					 * get the direction from Malak and set it as above
-					 * switch(//TODO get direction from Malak - l1.getdirection())
+					 * get the direction and display the same
 					 */
 					dir = l1.getDirection();
 					if(dir != null)
@@ -156,7 +165,7 @@ public class GameDisplay
 				{
 					temp+="_|__|_|";
 				}
-				w1 =getWeapon(envin.getWeapon(j, j, 1));
+				w1 =getWeapon(envin.getWeapon(i, j, 1));
 				if(w1 != null)
 				{
 					if(w1 instanceof Pistol)
@@ -176,7 +185,7 @@ public class GameDisplay
 				{
 					temp+="__|";
 				}
-				w1 =getWeapon(envin.getWeapon(j, j, 2));
+				w1 =getWeapon(envin.getWeapon(i, j, 2));
 				if(w1 != null)
 				{
 					if(w1 instanceof Pistol)
