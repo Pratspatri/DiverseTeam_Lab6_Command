@@ -158,7 +158,7 @@ public class Environment
 	 * @author - Prathyusha Akshintala
 	 * Method to get a weapon at the given location from a position.
 	 */
-	public Weapon getWeapon(int row, int col, int position)
+	/*public Weapon getWeapon(int row, int col, int position)
 	{
 		if (row < cells.length && col < cells[row].length)
 		{
@@ -168,7 +168,7 @@ public class Environment
 		{
 			return null;
 		}
-	}
+	}*/
 	
 	/**
 	 * @author - Prathyusha Akshintala
