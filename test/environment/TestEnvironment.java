@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import lifeform.Alien;
+import lifeform.Human;
+import lifeform.LifeForm;
+import lifeform.MockLifeForm;
 
 import org.junit.After;
 import org.junit.Test;
@@ -11,10 +15,6 @@ import org.junit.Test;
 import weapon.Pistol;
 import weapon.PlasmaCannon;
 import weapon.Weapon;
-import lifeform.Alien;
-import lifeform.Human;
-import lifeform.LifeForm;
-import lifeform.MockLifeForm;
 
 /**
  * The test cases for the Environment class. New tests @author - Malak Bassam
@@ -29,6 +29,57 @@ public class TestEnvironment {
 		Environment.resetInstance();
 	}
 
+	/**
+	 * test moveTemp() method as reference.
+	 */
+	@Test
+	public void testMoveTemp()
+	{
+		Environment env = Environment.getWorldInstance();
+		LifeForm human = new MockLifeForm("Bob",40);
+		env.addLifeForm(1, 1, human);
+		
+		//move north
+		human.setDirection("north");
+		human.setMaxSpeed(1);
+		boolean isMoved =env.moveTemp(human.getRowTrack(), human.getColTrack());
+		assertEquals(human,env.getLifeForm(0, 1));
+		assertTrue(isMoved);
+		
+		//move ease
+		human.setDirection("east");
+		isMoved =env.moveTemp(human.getRowTrack(), human.getColTrack());
+		assertEquals(human,env.getLifeForm(0, 2));
+		assertTrue(isMoved);
+		
+		//move west
+		human.setDirection("west");
+		isMoved =env.moveTemp(human.getRowTrack(), human.getColTrack());
+		assertEquals(human,env.getLifeForm(0, 1));
+		assertTrue(isMoved);
+		
+		//move south
+		human.setDirection("sorth");
+		isMoved =env.moveTemp(human.getRowTrack(), human.getColTrack());
+		assertEquals(human,env.getLifeForm(1, 1));
+		assertTrue(isMoved);
+		
+		//speed =3;
+		human.setMaxSpeed(3);
+		isMoved =env.moveTemp(human.getRowTrack(), human.getColTrack());
+		assertEquals(human,env.getLifeForm(4, 1));
+		assertTrue(isMoved);
+		
+		//there is a another LifeFom in the way. The LifeForm will pass though it.
+		LifeForm human2 = new MockLifeForm("Luck",40);
+		env.addLifeForm(2, 1, human2);
+		human.setDirection("north");
+		isMoved =env.moveTemp(human.getRowTrack(), human.getColTrack());
+		assertEquals(human,env.getLifeForm(1, 1));
+		assertTrue(isMoved);
+		
+	}
+	
 	/**
 	 * Test Human Moves correctly North without obstacles Test Human Moves
 	 * correctly North with obstacles

@@ -192,6 +192,96 @@ public class Environment
 		return cells[row][col].getWeapon(position);
 	}
 
+	
+
+	/**
+	 * Used as reference for Malak only.
+	 * @param life
+	 * @return
+	 */
+	public boolean moveTemp(int row, int col)
+	{
+		LifeForm movedLife = cells[row][col].getLifeForm(); 
+		if(movedLife!=null)
+		{
+			
+			if(movedLife.getDirection().compareToIgnoreCase("North")==0)
+			{
+				
+				int currentRow =row;
+				int aboveRow = currentRow-1;
+				for(int i = 0; i<movedLife.getMaxSpeed();i++)
+				{
+					if(aboveRow>=0&&cells[aboveRow][col].getLifeForm()==null)
+					{
+						removeLifeForm(currentRow,col);
+						addLifeForm(aboveRow,col,movedLife);
+						currentRow = aboveRow;
+					}
+					aboveRow -= 1;
+				}
+				return !(currentRow == row);
+			}
+			else if(movedLife.getDirection().compareToIgnoreCase("Sorth")==0)
+			{
+				int currentRow =row;
+				int underRow = currentRow+1;
+				for(int i = 0; i<movedLife.getMaxSpeed();i++)
+				{
+					if(underRow>=0&&cells[underRow][col].getLifeForm()==null)
+					{
+						removeLifeForm(currentRow,col);
+						addLifeForm(underRow,col,movedLife);
+						currentRow = underRow;
+					}
+					underRow += 1;
+				}
+				return !(currentRow == row);
+			}
+			else if(movedLife.getDirection().compareToIgnoreCase("East")==0)
+			{
+				int currentCol =col;
+				int rightCol = currentCol+1;
+				for(int i = 0; i<movedLife.getMaxSpeed();i++)
+				{
+					if(rightCol>=0&&cells[row][rightCol].getLifeForm()==null)
+					{
+						removeLifeForm(row,currentCol);
+						addLifeForm(row,rightCol,movedLife);
+						currentCol = rightCol;
+					}
+					rightCol += 1;
+				}
+				return !(currentCol == col);
+			}
+			else if(movedLife.getDirection().compareToIgnoreCase("West")==0)
+			{
+				int currentCol =col;
+				int leftCol = currentCol-1;
+				for(int i = 0; i<movedLife.getMaxSpeed();i++)
+				{
+					if(leftCol>=0&&cells[row][leftCol].getLifeForm()==null)
+					{
+						removeLifeForm(row,currentCol);
+						addLifeForm(row,leftCol,movedLife);
+						currentCol = leftCol;
+					}
+					leftCol -= 1;
+				}
+				return !(currentCol == col);
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+			return false;
+		
+	}
+	
+
+
 	/**
 	 * @author Malak Bassam Search for lifeform Return the life form if it
 	 *         exists Return Null if does not exist
