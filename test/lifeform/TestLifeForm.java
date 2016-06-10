@@ -5,16 +5,9 @@
  */
 package lifeform;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
 import org.junit.Test;
-
-import environment.Environment;
-import exceptions.MyNewException;
-import weapon.Chain_Gun;
-import weapon.Pistol;
-import weapon.Plasma_Connon;
 /**
  *  Tests the functionality provided by the LifeForm class   
  */
