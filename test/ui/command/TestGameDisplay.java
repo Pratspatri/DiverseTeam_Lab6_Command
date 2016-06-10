@@ -44,7 +44,8 @@ public class TestGameDisplay
 		Pistol p1 = new Pistol();
 		A1.pickUp(p1);
 		PlasmaCannon pc = new PlasmaCannon();
-		env.addWeapon(6, 5, pc, 1);*/
+		env.addWeapon(6, 5, pc, 1);
+		*/
 		
 		assertEquals(JOptionPane.YES_OPTION,JOptionPane.showConfirmDialog(null, "Created Human(1,2) and "
 				+ "Alien(2,5)\nDoes it look right?"));

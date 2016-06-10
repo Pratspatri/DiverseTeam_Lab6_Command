@@ -34,7 +34,7 @@ public class GameDisplay
 	private JPanel legend, map;
 	private JLabel displayArray[][];
 	private int row,col;
-	private final String DEFAULTFORMAT="_|__|_|__|__|";  
+	private final String DEFAULTFORMAT="_|__|_|__|__|";		// to display this default string in the GUI   
 	/**
 	 * Launch the application.
 	 */
@@ -45,7 +45,7 @@ public class GameDisplay
 	}
 
 	/**
-	 * Create the application.
+	 * Create the application. Setting the environment size to be (8,8)
 	 */
 	public GameDisplay() 
 	{
@@ -64,26 +64,26 @@ public class GameDisplay
 		 * Mock initialization check to just to see if everything needed is displayed correctly
 		 */
 		Environment env = Environment.getWorldInstance();
-		LifeForm l1 = new Human("Bob",50,10);
-		LifeForm m1 = new Human("Mon",50,10);
-		env.addLifeForm(4, 4, l1);
+		LifeForm l1 = new Human("Bob",50,10);				// Creating Human 1
+		LifeForm m1 = new Human("Mon",50,10);				// Creating Human 2
+		env.addLifeForm(4, 4, l1);							// adding them to the environment
 		env.addLifeForm(1, 2, m1);
-		l1.setDirection("north");
-		PlasmaCannon cannon = new PlasmaCannon();
-		l1.pickUp(cannon);
-		Pistol pistol = new Pistol();
+		l1.setDirection("north");							// setting direction to human 1
+		PlasmaCannon cannon = new PlasmaCannon();			
+		l1.pickUp(cannon);									// assigning a weapon to human 1	
+		Pistol pistol = new Pistol();						
 		ChainGun gun = new ChainGun();
-		env.addWeapon(4, 2, pistol, 1);
+		env.addWeapon(4, 2, pistol, 1);						// adding weapons to positions in the cell
 		env.addWeapon(4, 7, gun, 2);
 		
-		LifeForm A1 = new Alien("Jadoo",80);
-		LifeForm C1 = new Alien("Chan",80);
-		env.addLifeForm(7, 7, A1);
+		LifeForm A1 = new Alien("Jadoo",80);				// Creating Alien 1
+		LifeForm C1 = new Alien("Chan",80);					// Creating Alien 2
+		env.addLifeForm(7, 7, A1);							// adding them to the environment
 		env.addLifeForm(2, 5, C1);
 		Pistol p1 = new Pistol();
-		A1.pickUp(p1);
+		A1.pickUp(p1);										// assigning weapon to alien 1
 		PlasmaCannon pc = new PlasmaCannon();
-		env.addWeapon(6, 5, pc, 1);
+		env.addWeapon(6, 5, pc, 1);							// adding weapon to position in a cell
 		update();
 	}
 	/**
@@ -96,7 +96,7 @@ public class GameDisplay
 		Weapon w1;
 		String dir;
 		String temp="";
-		for(int i=0; i<8; i++)
+		for(int i=0; i<8; i++)									// considering the whole environment
 		{
 			for(int j=0; j<8; j++)
 			{
@@ -104,20 +104,20 @@ public class GameDisplay
 				l1 = envin.getLifeForm(i, j);
 				if(l1 != null)
 				{
-					if(l1 instanceof Human)
+					if(l1 instanceof Human)						// if the lifeForm defined is an instance of Human
 					{
-						temp+="H|";
+						temp+="H|";								// creating the display string by first adding lifeForm
 					}
 					else if(l1 instanceof Alien)
 					{
 						temp+="A|";
 					}
-					w1 =getWeapon(l1.getWeapon());
+					w1 =getWeapon(l1.getWeapon());				// if lifeForm present, assigning a weapon to it
 					if(w1 != null)
 					{
 						if(w1 instanceof Pistol)
 						{
-							temp+="P|";
+							temp+="P|";							// creating the display string further accordingly
 						}
 						else if(w1 instanceof PlasmaCannon)
 						{
@@ -165,12 +165,12 @@ public class GameDisplay
 				{
 					temp+="_|__|_|";
 				}
-				w1 =getWeapon(envin.getWeapon(i, j, 1));
+				w1 =getWeapon(envin.getWeapon(i, j, 1));					// assigning weapons to their slots in cell
 				if(w1 != null)
 				{
-					if(w1 instanceof Pistol)
+					if(w1 instanceof Pistol)								// if the weapon is an instance of pistol
 					{
-						temp+="P|";
+						temp+="P|";											// adding to the display string
 					}
 					else if(w1 instanceof PlasmaCannon)
 					{
@@ -210,7 +210,7 @@ public class GameDisplay
 		}
 	}
 
-	private Weapon getWeapon(Weapon weapon) 
+	private Weapon getWeapon(Weapon weapon) 					// making the wrapped weapon(weapon+attachment) to display only weapon
 	{
 		while(weapon instanceof Attachment)
 		{
@@ -247,8 +247,8 @@ public class GameDisplay
 		JPanel panel = new JPanel();
 		map.add(panel, BorderLayout.NORTH);
 		
-		JLabel lblMap = new JLabel("Map");
-		panel.add(lblMap);
+		JLabel map = new JLabel("Map");
+		panel.add(map);
 		
 		JPanel Environment = new JPanel();
 		map.add(Environment, BorderLayout.CENTER);
