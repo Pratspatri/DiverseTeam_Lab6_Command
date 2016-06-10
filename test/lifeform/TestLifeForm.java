@@ -42,7 +42,14 @@ public class TestLifeForm
 		entity1.setDirection("East");
 		assertEquals("East",entity1.getDirection());
  	}
-	
+	@Test
+ 	public void testDefaultMaxSpeed()
+ 	{
+		LifeForm entity1 = new MockLifeForm("Bob", 40,5);
+		assertEquals(0,entity1.getMaxSpeed());
+		entity1.setMaxSpeed(4);
+		assertEquals(4,entity1.getMaxSpeed());
+ 	}
 	
 	
 	/**
