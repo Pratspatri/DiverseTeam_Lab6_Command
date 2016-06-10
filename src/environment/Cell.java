@@ -1,148 +1,103 @@
+/**
+ *  Name:Malak Basssam
+ *  Course:CSC 561
+ *  Instructor: Dr. Girard
+ */
 package environment;
+
+import java.util.ArrayList;
 
 import weapon.Weapon;
 import lifeform.LifeForm;
 
-/**
- * This class consists members and functions related to Cell. Each Cell can hold
- * one life form.
- * New methods @author - Prathyusha Akshintala
- * Previous existing file @author : Sameer Kumar Kotra
- */
+/** 
+ * A Cell that can hold a LifeForm.   
+ */  
 
-public class Cell
-{
+public class Cell 
+{   
+
+    // Instant of class LifeForm 	
+	LifeForm entiry ;
+		
 	/**
-	 * LifeForm to store the LifeForm in the cell.
+	 * Constructor	
 	 */
-	private LifeForm entity;
+	public  Cell()
+	{
+	}
 	
 	/**
-	 * @author - Prathyusha Akshintala
-	 * Weapons to store two weapons for a LifeForm.
-	 */
-	
-	private Weapon weapon1, weapon2;
-
-	/**
-	 * Create an instance of Cell.
-	 */
-	public Cell()
-	{
-		entity = null;
-	}
-
-	/**
-	 * Adds the LifeForm to the Cell. Will not add if LifeForm already in the
-	 * Cell.
-	 * @param entity: LifeForm object to be store in the Cell.
-	 * @return true if added, false otherwise.
-	 */
-	public boolean addLifeForm(LifeForm entity)
-	{
-		if (this.entity == null)
-		{
-			this.entity = entity;
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Removes the LifeForm from the Cell.
-	 * @return LifeForm removed, null if none is present.
-	 */
-	public LifeForm removeLifeForm()
-	{
-		if (entity != null)
-		{
-			LifeForm temp = entity;
-			entity = null;
-			return temp;
-		}
-		return null;
-	}
-
-	/**
-	 * Returns the LifeForm in the Cell.
-	 * @return LifeForm present in the Cell.
+	 * To get the current lifeForm 
 	 */
 	public LifeForm getLifeForm()
 	{
-		return entity;
+		return entiry;
 	}
+			
+	 /** 
+	  * Tries to add the LifeForm to the Cell.  Will not add if a   
+	  *  LifeForm is already present.  
+	  *  @ return true if the LifeForm was added to the Cell, false otherwise.   
+	  */  
+	 public boolean addLifeForm(LifeForm lf)
+	 {   
+		 if(entiry != null)
+	       {
+		      return false;
+		   }
+	     else 
+	    	 entiry=lf;
+	    	 return true;	
+	 }
 	/**
-	 * @author - Prathyusha Akshintala
-	 * Method to get weapon with respect to the position given
-	 * @param position
-	 * @return
+	 * Tries to remove the LifeForm from the Cell.
 	 */
-	public Weapon getWeapon(int position)
-	{
-		if (0 < position && position < 3)
-		{
-			if (position == 1)
-			{
-				return weapon1;
-			}
-			else if (position == 2)
-			{
-				return weapon2;
-			}
-			else
-			{
-				return null;
-			}
-		}
-		return null;
+	 public LifeForm removeLifeForm()
+	 {      
+		  LifeForm temp;
+		  temp= entiry;
+		  entiry=null;
+		  return temp;
 	}
-	/**
-	 * @author - Prathyusha Akshintala
-	 * Method to add weapon to the given position
-	 * @param weapon
-	 * @param position
-	 * @return
-	 */
-	public boolean addWeapon(Weapon weapon, int position) 
-	{
-		if ( weapon1 == null && position == 1)
+		/**
+		 * Singleton Pattern
+		 */
+		ArrayList <Weapon> weapon = new ArrayList<Weapon>() ;
+		
+		/**
+		 * Add weapon to the cell
+		 * Each cell have two weapons
+		 */
+		public void setWeapon(Weapon w1)
 		{
-			weapon1 = weapon;
-			return true;
+			
+			if(weapon.size()<2)
+			{
+			weapon.add(w1);
+			}
 		}
-		else if (weapon2 == null && position == 2)
+		/**
+		 * Remove the weapon
+		 */
+		public Weapon removeWeapon(Weapon w1)
 		{
-			weapon2 = weapon;
-			return true;
+			if (weapon.get(0)==w1)
+			{
+				weapon.remove(0);
+			}
+			else	if (weapon.get(1)==w1)
+			{
+				weapon.remove(1);
+			}	
+			return w1;
 		}
-		else
+
+		/**
+		 * Return all weapons
+		 */
+		public ArrayList <Weapon> getWeapon() 
 		{
-			return false;
+			return weapon;
 		}
-	}
-	/**
-	 * Method to remove Weapon from the position
-	 * @author - Prathyusha Akshintala
-	 * @param position
-	 * @return
-	 */
-	public Weapon removeWeapon(int position) 
-	{
-		if (weapon1 != null && position == 1)
-		{
-			Weapon temp = weapon1;
-			weapon1 = null;
-			return temp;
-		}
-		else if (weapon2 != null && position == 2)
-		{
-			Weapon tempo = weapon2;
-			weapon2 = null;
-			return tempo;
-		}
-		else
-		{
-			return null;
-		}
-	}
-}
+}//end class cell
