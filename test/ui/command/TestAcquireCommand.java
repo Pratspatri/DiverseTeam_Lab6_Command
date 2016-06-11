@@ -39,6 +39,10 @@ public class TestAcquireCommand
 	{
 		Environment.resetInstance();
 	}
+	
+	/**
+	 * Test initialization of AcquireCommand Class. 
+	 */
 	@Test
 	public void testInitialization()
 	{
@@ -48,7 +52,7 @@ public class TestAcquireCommand
 	}
 	
 	/**
-	 * 
+	 * Test execute() Method.
 	 */
 	@Test
 	public void testExecute()

@@ -189,13 +189,40 @@ public class Environment
 	 */
 	public Weapon getWeapon(int row, int col, int position) 
 	{
-		return cells[row][col].getWeapon(position);
+		try
+		{
+			return cells[row][col].getWeapon(position);
+		}
+		catch(ArrayIndexOutOfBoundsException ex)
+		{
+			return null;
+		}
 	}
 
+	/**
+	 * Gets the number of row.
+	 * 
+	 * @author Jixiang Lu
+	 * @return the number of row
+	 */
+	public int getNumberOfRow()
+	{
+		return cells.length;
+	}
 	
+	/**
+	 * Gets the number of column.
+	 * 
+	 * @author Jixiang Lu
+	 * @return the number of column 
+	 */
+	public int getNumberOfCol()
+	{
+		return cells[0].length;
+	}
 
 	/**
-	 * Used as reference for Malak only.
+	 * Used as reference for Malak only.---Jixiang Lu
 	 * @param life
 	 * @return
 	 */
@@ -222,7 +249,7 @@ public class Environment
 				}
 				return !(currentRow == row);
 			}
-			else if(movedLife.getDirection().compareToIgnoreCase("Sorth")==0)
+			else if(movedLife.getDirection().compareToIgnoreCase("South")==0)
 			{
 				int currentRow =row;
 				int underRow = currentRow+1;

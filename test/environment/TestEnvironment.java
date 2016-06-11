@@ -25,10 +25,22 @@ public class TestEnvironment {
 	 * Reset the static variable
 	 */
 	@After
-	public void after() {
+	public void after() 
+	{
 		Environment.resetInstance();
 	}
 
+	/**
+	 * Tests getNumberOfRow() and getNumberOfCol()
+	 * @author Jixiang Lu
+	 */
+	@Test
+	public void testGetNumberOfRowAndCol()
+	{
+		Environment env = Environment.getWorldInstance();
+		assertEquals(8,env.getNumberOfRow());
+		assertEquals(8,env.getNumberOfCol());
+	}
 	/**
 	 * test moveTemp() method as reference.
 	 */
@@ -59,7 +71,7 @@ public class TestEnvironment {
 		assertTrue(isMoved);
 		
 		//move south
-		human.setDirection("sorth");
+		human.setDirection("south");
 		isMoved =env.moveTemp(human.getRowTrack(), human.getColTrack());
 		assertEquals(human,env.getLifeForm(1, 1));
 		assertTrue(isMoved);

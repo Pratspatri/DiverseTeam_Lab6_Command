@@ -270,4 +270,14 @@ public abstract class LifeForm implements TimeObserver
 	  {
 		  return maxSpeed;
 	  }
+	  
+	  /**
+	   * Gets the number of Cell that the LifeForm can attach other LifeForm through.
+	   * @author Jixiang Lu
+	   * @return
+	   */
+	  public int getAttachDistance()
+	  {
+		  return (weapon==null)?0:weapon.getMaxRange()/5;
+	  }
 }

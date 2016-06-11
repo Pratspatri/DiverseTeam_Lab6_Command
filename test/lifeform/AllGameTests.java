@@ -8,6 +8,7 @@ import recovery.TestRecoveryFractional;
 import recovery.TestRecoveryLinear;
 import recovery.TestRecoveryNone;
 import ui.command.TestAcquireCommand;
+import ui.command.TestAttackCommand;
 import ui.command.TestDropCommand;
 import ui.command.TestGameDisplay;
 import ui.command.TestReloadCommand;
@@ -33,7 +34,8 @@ import gameplay.TestSimpleTimer;
 { TestAlien.class, TestHuman.class, TestLifeForm.class, TestCell.class, TestEnvironment.class, TestSimpleTimer.class,
 		TestRecoveryFractional.class, TestRecoveryLinear.class, TestRecoveryNone.class, TestAttachment.class,
 		TestChainGun.class, TestGenericWeapon.class, TestPistol.class, TestPlasmaCannon.class, TestPowerBooster.class,
-		TestScope.class, TestStabilizer.class, TestDropCommand.class, TestReloadCommand.class,TestAcquireCommand.class,TestGameDisplay.class })
+		TestScope.class, TestStabilizer.class, TestDropCommand.class, TestReloadCommand.class,TestAcquireCommand.class,TestGameDisplay.class,
+		TestAttackCommand.class})
 public class AllGameTests
 {
 
