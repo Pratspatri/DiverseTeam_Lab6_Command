@@ -17,7 +17,7 @@ import weapon.PlasmaCannon;
 import weapon.Weapon;
 
 /**
- * The test cases for the Environment class. New tests @author - Malak Bassam
+ * The test cases for the Environment class. New tests @author - Malak Bassam ,Jixiang Lu
  * Previous existing tests @author : Prathyusha Akshintala
  */
 public class TestEnvironment {
@@ -41,56 +41,11 @@ public class TestEnvironment {
 		assertEquals(8,env.getNumberOfRow());
 		assertEquals(8,env.getNumberOfCol());
 	}
+	
 	/**
-	 * test moveTemp() method as reference.
+	 * @author - Malak Bassam Test moving of the
+	 *         LifeForm.
 	 */
-	@Test
-	public void testMoveTemp()
-	{
-		Environment env = Environment.getWorldInstance();
-		LifeForm human = new MockLifeForm("Bob",40);
-		env.addLifeForm(1, 1, human);
-		
-		//move north
-		human.setDirection("north");
-		human.setMaxSpeed(1);
-		boolean isMoved =env.moveTemp(human.getRowTrack(), human.getColTrack());
-		assertEquals(human,env.getLifeForm(0, 1));
-		assertTrue(isMoved);
-		
-		//move ease
-		human.setDirection("east");
-		isMoved =env.moveTemp(human.getRowTrack(), human.getColTrack());
-		assertEquals(human,env.getLifeForm(0, 2));
-		assertTrue(isMoved);
-		
-		//move west
-		human.setDirection("west");
-		isMoved =env.moveTemp(human.getRowTrack(), human.getColTrack());
-		assertEquals(human,env.getLifeForm(0, 1));
-		assertTrue(isMoved);
-		
-		//move south
-		human.setDirection("south");
-		isMoved =env.moveTemp(human.getRowTrack(), human.getColTrack());
-		assertEquals(human,env.getLifeForm(1, 1));
-		assertTrue(isMoved);
-		
-		//speed =3;
-		human.setMaxSpeed(3);
-		isMoved =env.moveTemp(human.getRowTrack(), human.getColTrack());
-		assertEquals(human,env.getLifeForm(4, 1));
-		assertTrue(isMoved);
-		
-		//there is a another LifeFom in the way. The LifeForm will pass though it.
-		LifeForm human2 = new MockLifeForm("Luck",40);
-		env.addLifeForm(2, 1, human2);
-		human.setDirection("north");
-		isMoved =env.moveTemp(human.getRowTrack(), human.getColTrack());
-		assertEquals(human,env.getLifeForm(1, 1));
-		assertTrue(isMoved);
-		
-	}
 	
 	/**
 	 * Test Human Moves correctly North without obstacles Test Human Moves
@@ -103,14 +58,14 @@ public class TestEnvironment {
 		// move without obstacles
 		Human human1 = new Human("Bob", 40, 10);
 		assertTrue(env.addLifeForm(4, 0, human1));
-		env.move(human1);
+		env.move(human1.getRowTrack(),human1.getColTrack());
 		assertEquals(1, human1.getRowTrack());
 		assertEquals(0, human1.getColTrack());
 		// can move just one cell because there is obstacles which is not all
 		// cells are full
 		Human human2 = new Human("fred", 40, 10);
 		assertTrue(env.addLifeForm(4, 0, human2));
-		env.move(human2);
+		env.move(human2.getRowTrack(),human2.getColTrack());
 		assertEquals(2, human2.getRowTrack());
 		assertEquals(0, human2.getColTrack());
 		assertNull(env.getLifeForm(4, 0));
@@ -121,7 +76,7 @@ public class TestEnvironment {
 		assertTrue(env.addLifeForm(3, 0, human3));
 		assertTrue(env.addLifeForm(4, 0, human4));
 		assertTrue(env.addLifeForm(5, 0, human5));
-		env.move(human4);
+		env.move(human4.getRowTrack(),human4.getColTrack());
 		assertEquals(4, human4.getRowTrack());
 		assertEquals(0, human4.getColTrack());
 
@@ -138,10 +93,11 @@ public class TestEnvironment {
 		Alien a1 = new Alien("Bob", 40);
 		Alien a22 = new Alien("Fred", 60);
 		Alien a3 = new Alien("Lez", 40);
+
 		// There is no obstacles ,so can move
 		assertTrue(env.addLifeForm(4, 1, a1));
 		a1.setDirection("East");
-		env.move(a1);
+		env.move(a1.getRowTrack(),a1.getColTrack());
 		assertEquals(4, a1.getRowTrack());
 		assertEquals(3, a1.getColTrack());
 		assertNull(env.getLifeForm(4, 1));
@@ -149,14 +105,14 @@ public class TestEnvironment {
 		// one cell
 		assertTrue(env.addLifeForm(4, 1, a22));
 		a22.setDirection("East");
-		env.move(a22);
+		env.move(a22.getRowTrack(),a22.getColTrack());
 		assertEquals(4, a22.getRowTrack());
 		assertEquals(2, a22.getColTrack());
 		assertNull(env.getLifeForm(4, 0));
 		// there is obstacle which all cells are full, cannot move
 		assertTrue(env.addLifeForm(4, 1, a3));
 		a3.setDirection("East");
-		env.move(a3);
+		env.move(a3.getRowTrack(),a3.getColTrack());
 		assertEquals(4, a3.getRowTrack());
 		assertEquals(1, a3.getColTrack());
 	}
@@ -176,7 +132,7 @@ public class TestEnvironment {
 		// There is no obstacles, so can move
 		assertTrue(env.addLifeForm(0, 3, human1));
 		human1.setDirection("South");
-		env.move(human1);
+		env.move(human1.getRowTrack(),human1.getColTrack());
 		assertEquals(3, human1.getRowTrack());
 		assertEquals(3, human1.getColTrack());
 		assertNull(env.getLifeForm(0, 3));
@@ -185,13 +141,13 @@ public class TestEnvironment {
 		assertTrue(env.addLifeForm(1, 3, human3));
 		assertTrue(env.addLifeForm(2, 3, human4));
 		human2.setDirection("South");
-		env.move(human2);
+		env.move(human2.getRowTrack(),human2.getColTrack());
 		assertEquals(0, human2.getRowTrack());
 		assertEquals(3, human2.getColTrack());
 		// There is obstacles which is not all cells are full, can move just one
 		// cell
 		human3.setDirection("South");
-		env.move(human3);
+		env.move(human3.getRowTrack(),human3.getColTrack());
 		assertEquals(4, human3.getRowTrack());
 		assertEquals(3, human3.getColTrack());
 		assertNull(env.getLifeForm(1, 3));
@@ -214,7 +170,7 @@ public class TestEnvironment {
 		// there is not obstacles,so can move
 		assertTrue(env.addLifeForm(2, 2, a1));
 		a1.setDirection("West");
-		env.move(a1);
+		env.move(a1.getRowTrack(),a1.getColTrack());
 		assertEquals(2, a1.getRowTrack());
 		assertEquals(0, a1.getColTrack());
 		assertNull(env.getLifeForm(2, 2));
@@ -222,7 +178,7 @@ public class TestEnvironment {
 		assertTrue(env.addLifeForm(2, 1, a2));
 		assertTrue(env.addLifeForm(2, 2, a3));
 		a3.setDirection("West");
-		env.move(a3);
+		env.move(a3.getRowTrack(),a3.getColTrack());
 		assertEquals(2, a3.getRowTrack());
 		assertEquals(2, a3.getColTrack());
 		// there is an obstacle which is not all cells are full, can move just
@@ -230,7 +186,7 @@ public class TestEnvironment {
 		assertTrue(env.addLifeForm(0, 0, a4));
 		assertTrue(env.addLifeForm(0, 2, a5));
 		a5.setDirection("West");
-		env.move(a5);
+		env.move(a5.getRowTrack(),a3.getColTrack());
 		assertEquals(0, a5.getRowTrack());
 		assertEquals(1, a5.getColTrack());
 		assertNull(env.getLifeForm(0, 2));
@@ -253,19 +209,19 @@ public class TestEnvironment {
 		// one cell
 		assertTrue(env.addLifeForm(2, 0, a1));
 		assertTrue(env.addLifeForm(4, 0, a2));
-		env.move(a2);
+		env.move(a2.getRowTrack(),a2.getColTrack());
 		assertEquals(3, a2.getRowTrack());
 		assertEquals(0, a2.getColTrack());
 		// there is not obstacles,so can move
 		assertTrue(env.addLifeForm(4, 1, a3));
-		env.move(a3);
+		env.move(a3.getRowTrack(),a3.getColTrack());
 		assertEquals(2, a3.getRowTrack());
 		assertEquals(1, a3.getColTrack());
 		// there is an obstacle which is all cells are full, can move just one
 		// cell
 		assertTrue(env.addLifeForm(0, 1, a4));
 		assertTrue(env.addLifeForm(1, 1, a5));
-		env.move(a3);
+		env.move(a3.getRowTrack(),a3.getColTrack());
 		assertEquals(2, a3.getRowTrack());
 		assertEquals(1, a3.getColTrack());
 	}
@@ -283,10 +239,12 @@ public class TestEnvironment {
 		Human human3 = new Human("fred", 40, 10);
 		Human human4 = new Human("bob", 40, 10);
 		Human human5 = new Human("bob", 40, 10);
+		Human human6 = new Human("bob", 40, 10);
+	
 		// there is not obstacles,so can move
 		assertTrue(env.addLifeForm(4, 0, human1));
 		human1.setDirection("East");
-		env.move(human1);
+		env.move(human1.getRowTrack(),human1.getColTrack());
 		assertEquals(4, human1.getRowTrack());
 		assertEquals(3, human1.getColTrack());
 		assertNull(env.getLifeForm(4, 0));
@@ -295,13 +253,17 @@ public class TestEnvironment {
 		assertTrue(env.addLifeForm(3, 0, human3));
 		assertTrue(env.addLifeForm(3, 1, human4));
 		assertTrue(env.addLifeForm(3, 2, human5));
+		assertTrue(env.addLifeForm(3, 3, human6));
 		human3.setDirection("East");
-		env.move(human3);
+		env.move(human3.getRowTrack(),human3.getColTrack());
+		assertEquals(3, human3.getRowTrack());
+		assertEquals(0, human3.getColTrack());
+	
 		// there is an obstacle which is not all cells are full, can move just
 		// one cell
 		assertTrue(env.addLifeForm(4, 0, human2));
 		human2.setDirection("East");
-		env.move(human2);
+		env.move(human2.getRowTrack(),human2.getColTrack());
 		assertEquals(4, human2.getRowTrack());
 		assertEquals(2, human2.getColTrack());
 		assertNull(env.getLifeForm(4, 0));
@@ -322,7 +284,7 @@ public class TestEnvironment {
 		// there is not obstacles,so can move
 		assertTrue(env.addLifeForm(0, 3, a1));
 		a1.setDirection("South");
-		env.move(a1);
+		env.move(a1.getRowTrack(),a1.getColTrack());
 		assertEquals(2, a1.getRowTrack());
 		assertEquals(3, a1.getColTrack());
 		assertNull(env.getLifeForm(0, 3));
@@ -331,14 +293,14 @@ public class TestEnvironment {
 		assertTrue(env.addLifeForm(0, 3, a2));
 		assertTrue(env.addLifeForm(1, 3, a3));
 		a2.setDirection("South");
-		env.move(a2);
+		env.move(a2.getRowTrack(),a2.getColTrack());
 		assertEquals(0, a2.getRowTrack());
 		assertEquals(3, a2.getColTrack());
 		// there is an obstacle which is not all cells are full, can move just
 		// one cell
 		assertTrue(env.addLifeForm(4, 3, a4));
 		a4.setDirection("South");
-		env.move(a1);
+		env.move(a1.getRowTrack(),a1.getColTrack());
 		assertEquals(3, a1.getRowTrack());
 		assertEquals(3, a1.getColTrack());
 		assertNull(env.getLifeForm(2, 3));
@@ -363,14 +325,14 @@ public class TestEnvironment {
 		assertTrue(env.addLifeForm(0, 2, human5));
 		assertTrue(env.addLifeForm(0, 3, human6));
 		human6.setDirection("West");
-		env.move(human6);
+		env.move(human6.getRowTrack(),human6.getColTrack());
 		assertEquals(0, human6.getRowTrack());
 		assertEquals(1, human6.getColTrack());
 		// there is an obstacle which is not all cells are full, can move just
 		// one cell
 		assertTrue(env.addLifeForm(2, 3, human1));
 		human1.setDirection("West");
-		env.move(human1);
+		env.move(human1.getRowTrack(),human1.getColTrack());
 		assertEquals(2, human1.getRowTrack());
 		assertEquals(0, human1.getColTrack());
 		assertNull(env.getLifeForm(2, 3));
@@ -378,7 +340,7 @@ public class TestEnvironment {
 		// cell
 		assertTrue(env.addLifeForm(2, 1, human2));
 		assertTrue(env.addLifeForm(2, 2, human3));
-		env.move(human1);
+		env.move(human1.getRowTrack(),human1.getColTrack());
 		assertEquals(2, human1.getRowTrack());
 		assertEquals(0, human1.getColTrack());
 	}
