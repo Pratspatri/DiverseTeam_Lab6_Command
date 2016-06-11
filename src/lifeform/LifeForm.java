@@ -44,13 +44,15 @@ public abstract class LifeForm implements TimeObserver
 	private int trackCol;
 
 	/**
+	 * @author - Malak Bassam
 	 * Max speed let life form move per round
 	 */
-	 protected int maxSpeed=0;
+	 protected int maxSpeed;
 	 /**
+	  * @author - Malak Bassam
 	  * Set Direction for each life form
 	  */
-	 protected String direction="North";
+	 protected String direction;
 	/**
 	 * Modified existing method - @author - Prathyusha Akshintala
 	 * Create an instance of LifeForm with given values.
@@ -65,8 +67,8 @@ public abstract class LifeForm implements TimeObserver
 		weapon = null;
 		trackRow = -1;
 		trackCol = -1;
-		 maxSpeed=0;
-		 direction="North";
+		maxSpeed=0;
+		direction="North";
 	}
 
 	/**
@@ -263,7 +265,7 @@ public abstract class LifeForm implements TimeObserver
 	  
 	  /**
 	   * @author - Malak Bassam
-	   * get max speed
+	   * get max speed for lifeform
 	   * @return
 	   */
 	  public int getMaxSpeed()

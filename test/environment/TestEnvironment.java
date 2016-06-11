@@ -345,6 +345,7 @@ public class TestEnvironment {
 		assertEquals(0, human1.getColTrack());
 	}
 
+	// old Test
 	/**
 	 * @author - Prathyusha Akshintala Test the initialization of the
 	 *         Environment.

@@ -11,12 +11,14 @@ import recovery.RecoveryLinear;
 
 /**
  * The test cases for the Alien class.
- * @author : Sameer Kumar Kotra
+ * @author : Prathyusha Akshintala 
+ * New Test is by @author : Malak Bassam
  */
 public class TestAlien
 {  
 	// lab 6
 	/**
+	 * @author : Malak Bassam
 	 * Test the max speed for any Alien is 2
 	 */
 	@Test
@@ -35,6 +37,7 @@ public class TestAlien
 		Alien alien = new Alien("Bob", 40);
 		assertEquals(10, alien.getAttachStrength());
 	}
+	// old Test
 
 	/**
 	 * Test set Recovery rate when >= 0.

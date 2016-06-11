@@ -16,14 +16,15 @@ import weapon.Weapon;
  
 /** 
  * The test cases for the LifeForm class. 
- * New tests - @author Prathyusha Akshintala 
- * Previous existing file @author : Sameer Kumar Kotra 
+ * New tests - @author Malak Bassam
+ * Previous existing file @author : Prathyusha Akshintala  
  */ 
 public class TestLifeForm 
 { 
 	//Lab 6
 	
 		/**
+		 * @author Malak Bassam
 		 * Test The default direction for any lifeform is North
 		 */
 		@Test
@@ -32,8 +33,10 @@ public class TestLifeForm
 			LifeForm entity1 = new MockLifeForm("Bob", 40,5);
 			assertEquals("North",entity1.getDirection());
 	 	}
+		
 		/**
-		 * Test that could  direction for any lifeform 
+		 * @author Malak Bassam
+		 * Test that any lifeform could change direction  
 		 */
 		@Test
 	 	public void testChangeDirection()
@@ -43,6 +46,12 @@ public class TestLifeForm
 			entity1.setDirection("East");
 			assertEquals("East",entity1.getDirection());
 	 	}
+		
+		/**
+		 * @author Malak Bassam
+		 * Test That defaultof max speed  for any lifeform is 0
+		 * There is a chance to change the max speed
+		 */
 		@Test
 	 	public void testDefaultChangeMaxSpeed()
 	 	{
@@ -52,7 +61,7 @@ public class TestLifeForm
 			assertEquals(4,entity1.getMaxSpeed());
 	 	}
 		
-		
+	//Old Test		
   /** 
    * @author - Prathyusha Akshintala 
    * tests to track location 

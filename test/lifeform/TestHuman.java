@@ -6,14 +6,15 @@ import org.junit.Test;
 
 /**
  * The test cases for the Human class.
- * @author : Sameer Kumar Kotra
+ * @author : Prathyusha Akshintala 
+ * New Test is by @author : Malak Bassam
  */
 public class TestHuman
 {
+	// lab 6
+	
 	/**
-	 * Test the default Strength of the Human.
-	 */
-	/**
+	 * @author : Malak Bassam
 	 * Test the max speed for any Human is 3
 	 */
 	@Test
@@ -23,6 +24,10 @@ public class TestHuman
 		 assertEquals(3, human1.getMaxSpeed());
 	}
 	
+	//old Test
+	/**
+	 * Test the default Strength of the Human.
+	 */
 	@Test
 	public void testLifeStrength()
 	{
