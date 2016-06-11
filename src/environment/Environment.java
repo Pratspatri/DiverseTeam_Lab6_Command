@@ -223,6 +223,9 @@ public class Environment
 
 	/**
 	 * Used as reference for Malak only.---Jixiang Lu
+	 * If you want to delete this method, please let me know.
+	 * And I will change my moveCommand class. If you think it is good,
+	 * please add @author forYourName in this method
 	 * @param life
 	 * @return
 	 */
