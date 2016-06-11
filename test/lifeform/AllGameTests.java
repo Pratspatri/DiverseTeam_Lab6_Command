@@ -12,6 +12,10 @@ import ui.command.TestAttackCommand;
 import ui.command.TestDropCommand;
 import ui.command.TestGameDisplay;
 import ui.command.TestReloadCommand;
+import ui.command.TestTurnEastCommand;
+import ui.command.TestTurnNorthCommand;
+import ui.command.TestTurnSouthCommand;
+import ui.command.TestTurnWestCommand;
 import weapon.TestAttachment;
 import weapon.TestChainGun;
 import weapon.TestGenericWeapon;
@@ -35,7 +39,8 @@ import gameplay.TestSimpleTimer;
 		TestRecoveryFractional.class, TestRecoveryLinear.class, TestRecoveryNone.class, TestAttachment.class,
 		TestChainGun.class, TestGenericWeapon.class, TestPistol.class, TestPlasmaCannon.class, TestPowerBooster.class,
 		TestScope.class, TestStabilizer.class, TestDropCommand.class, TestReloadCommand.class,TestAcquireCommand.class,TestGameDisplay.class,
-		TestAttackCommand.class})
+		TestAttackCommand.class, TestTurnEastCommand.class, TestTurnWestCommand.class, TestTurnNorthCommand.class,
+		TestTurnSouthCommand.class})
 public class AllGameTests
 {
 
