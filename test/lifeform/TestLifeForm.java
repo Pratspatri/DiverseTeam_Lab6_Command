@@ -24,6 +24,7 @@ public class TestLifeForm
 	//Lab 6
 	
 		/**
+		 * @author - Malak
 		 * Test The default direction for any lifeform is North
 		 */
 		@Test

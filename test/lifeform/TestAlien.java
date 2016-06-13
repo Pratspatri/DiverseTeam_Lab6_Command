@@ -17,6 +17,7 @@ public class TestAlien
 {  
 	// lab 6
 	/**
+	 * @author - Malak
 	 * Test the max speed for any Alien is 2
 	 */
 	@Test
@@ -27,6 +28,7 @@ public class TestAlien
 	}
 
 	/**
+	 * Old tests @author - Prathyusha
 	 * Test the default Strength of the Alien.
 	 */
 	@Test

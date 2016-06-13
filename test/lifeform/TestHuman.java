@@ -11,6 +11,7 @@ import org.junit.Test;
 public class TestHuman
 {
 	/**
+	 * @author - Malak
 	 * Test the default Strength of the Human.
 	 */
 	/**
@@ -22,7 +23,10 @@ public class TestHuman
 		 Human human1 = new Human("Bob", 40,10); 
 		 assertEquals(3, human1.getMaxSpeed());
 	}
-	
+	/**
+	 * @author - Prathyusha 
+	 * Old tests
+	 */
 	@Test
 	public void testLifeStrength()
 	{
