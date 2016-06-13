@@ -247,8 +247,8 @@ public class GameDisplay
 		JPanel panel = new JPanel();
 		map.add(panel, BorderLayout.NORTH);
 		
-		JLabel map = new JLabel("Map");
-		panel.add(map);
+		JLabel mapName = new JLabel("Map");
+		panel.add(mapName);
 		
 		JPanel Environment = new JPanel();
 		map.add(Environment, BorderLayout.CENTER);

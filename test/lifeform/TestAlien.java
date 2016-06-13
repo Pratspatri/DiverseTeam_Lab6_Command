@@ -29,6 +29,7 @@ public class TestAlien
 	}
 
 	/**
+	 * Old tests @author - Prathyusha
 	 * Test the default Strength of the Alien.
 	 */
 	@Test
