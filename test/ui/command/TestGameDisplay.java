@@ -67,6 +67,6 @@ public class TestGameDisplay
 		
 		assertEquals(JOptionPane.YES_OPTION,JOptionPane.showConfirmDialog(null, "Map Legend displayes H = Human,"
 				+ "A = Alien, P = Pistol, PC = Plasma Cannon, CG = Chain Gun\nDoes it look right?"));
-	}
+	} 
 
 }

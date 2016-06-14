@@ -13,7 +13,7 @@ public class TurnEastCommand implements Command
 	
 	@Override
 	public String execute() {
-		life.setDirection("East");
+		life.setDirection("East"); 
 		return "Turn East!";
 		
 	}

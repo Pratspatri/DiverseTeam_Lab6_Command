@@ -23,7 +23,7 @@ public class Invoker implements ActionListener
 	Command AttackCm ; 
 	JButton reload ; 
 	JButton acquire ; 
-	JButton turn ; 
+	JButton attack ; 
 	JButton move ; 
 	JButton drop ; 
 	JButton east ; 
@@ -69,11 +69,11 @@ public class Invoker implements ActionListener
 		
 		acquire = new JButton("Acquire");
 		panel.add(acquire);
-		acquire.addActionListener(this);
+		acquire.addActionListener(this); 
 		
-	    turn = new JButton("Turn");
-		panel.add(turn);
-		turn.addActionListener(this);
+		attack = new JButton("Attack");
+		panel.add(attack);
+		attack.addActionListener(this);
 		
 		move = new JButton("Move");
 		panel.add(move);
@@ -150,7 +150,7 @@ public class Invoker implements ActionListener
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource()== reload)
 		{
-			reloadCm.execute();
+			reloadCm.execute(); 
 		}
 		else if(event.getSource()== acquire)
 		{
@@ -176,9 +176,13 @@ public class Invoker implements ActionListener
 		{
 			TurnSouthCm.execute();
 		}
-		else if(event.getSource()== north)
+		else if(event.getSource()== north) 
 		{
 			TurnNourthCm.execute();
+		}
+		else if(event.getSource()== attack) 
+		{
+			AttackCm.execute();
 		}
 		
 		

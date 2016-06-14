@@ -17,5 +17,5 @@ public class MoveCommand implements Command
 	{
 		Environment env = Environment.getWorldInstance();
 		return (env.move(life.getRowTrack(), life.getColTrack()))?"Move!":"Can't move!";
-	}
+	} 
 }

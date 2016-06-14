@@ -14,15 +14,14 @@ public class InvokerBuilder {
 	{
 		Invoker invoker = new Invoker();
 		
-		invoker.setRelaod(new ReloadCommand(life));
+		invoker.setRelaod(new ReloadCommand(life)); 
 		invoker.setAcquire(new AcquireCommand(life));
 		invoker.setDrop(new DropCommand(life));
-		invoker.setMove(new MoveCommand(life));
 		invoker.setTurnEast(new TurnEastCommand(life));
 		invoker.setTurnNorth(new TurnNorthCommand(life));
 		invoker.setTurnSouth(new TurnSouthCommand(life));
-		invoker.setTurnWest(new TurnWestCommand(life));
-		
+		invoker.setTurnWest(new TurnWestCommand(life)); 
+		invoker.setMove(new MoveCommand(life));
 		return invoker ; 
 	}
 
