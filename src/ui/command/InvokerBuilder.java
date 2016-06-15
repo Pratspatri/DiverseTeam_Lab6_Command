@@ -22,6 +22,7 @@ public class InvokerBuilder {
 		invoker.setTurnSouth(new TurnSouthCommand(life));
 		invoker.setTurnWest(new TurnWestCommand(life)); 
 		invoker.setMove(new MoveCommand(life));
+		invoker.setAttack(new AttackCommand(life));
 		return invoker ; 
 	}
 

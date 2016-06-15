@@ -32,7 +32,7 @@ public class TestInvoker
 		LifeForm life = new MockLifeForm("Bob",60);
 		env.addLifeForm(3, 3, life);
 		InvokerBuilder build = new InvokerBuilder();
-		Invoker in = build.getInvoker(life);
+		Invoker in = build.getInvoker(life); 
 		life.setMaxSpeed(1);
 		/**
 		 * What north.doclick() does is set the Direction ("North")
@@ -136,13 +136,78 @@ public class TestInvoker
 		
 		Weapon wp = new MockGenericWeapon(50,12,5,5); 
 	    env.addWeapon(2, 2, wp, 1);
+	    // Test the Acquire button  
 		in.acquire.doClick();
 		assertEquals(wp,life.getWeapon());
 		assertNull(env.getWeapon(2, 2, 1));
-			
+			//test the drop button 
 	    in.drop.doClick();
 		assertNull(life.getWeapon());
 		assertEquals(wp,env.getWeapon(2, 2, 1));
+				
+		
+	}
+	
+	
+	/**
+	 * This method tests that clicking reload  button will attached 
+	 * the correct command
+	 */
+	@Test
+	public void testButtonClickReload()
+	{
+		
+		Environment env = Environment.getWorldInstance();
+		LifeForm life = new MockLifeForm("Bob",60);
+		env.addLifeForm(2, 2, life);
+		InvokerBuilder build = new InvokerBuilder();
+		Invoker in = build.getInvoker(life);
+		
+		Weapon wp = new MockGenericWeapon(50,12,5,5); 
+	   life.pickUp(wp);
+	   assertEquals(5,life.getWeapon().getActualAmmo());
+	   life.getWeapon().fire(10) ;
+	   assertEquals(4,life.getWeapon().getActualAmmo());
+	   /**
+	    * Test The reload Button 
+	    */
+	   in.reload.doClick();
+	   assertEquals(5,life.getWeapon().getActualAmmo());
+				
+		
+	}
+	
+	/**
+	 * This method tests that clicking Attack  button will attached 
+	 * the correct command
+	 */
+	@Test
+	public void testButtonClickattack()
+	{
+		
+		Environment env = Environment.getWorldInstance();
+		LifeForm life = new MockLifeForm("Bob",60);
+		LifeForm target = new MockLifeForm("target", 60);
+		env.addLifeForm(2, 2, life);
+		env.addLifeForm(2, 1, target);
+		InvokerBuilder build = new InvokerBuilder();
+		Invoker in = build.getInvoker(life);
+		
+		Weapon wp = new MockGenericWeapon(50,12,5,5); 
+		//life pick up the weapon 
+	   life.pickUp(wp);
+	   /**
+	    * Use west button to turn West and attack the target
+	    */
+	   in.west.doClick();
+	   /**
+	    * Test Attack button 
+	    */
+	   in.attack.doClick();
+	   /**
+	    * expected Result is 55 the life points of the target 
+	    */
+	   assertEquals(55,target.getCurrentLifePoints());
 				
 		
 	}
