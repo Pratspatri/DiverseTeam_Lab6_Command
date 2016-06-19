@@ -20,11 +20,54 @@ public class TestInvoker
 	
 	
 	
+	/**
+	 * his method tests that clicking move  button will attached the correct command 
+	 */
+	
+	@Test
+	public void testMoveCommand()
+	{
+		Environment env = Environment.getWorldInstance(); 
+		LifeForm life = new MockLifeForm("Bob",60);
+		InvokerBuilder build = new InvokerBuilder();
+		Invoker in = build.getInvoker(life);
+		// add life Form 
+		env.addLifeForm(5, 5, life);
+		life.setMaxSpeed(1);
+		//move North
+		
+		/**
+		 * What north.doclick() does is set the Direction ("North")
+		 * Now the row is 5 and when it turns to north will be -1
+		 * So the expected result is 4
+		 */ 
+		
+		in.north.doClick();
+		in.move.doClick();
+		
+		assertEquals(life,env.getLifeForm(4, 5));
+		
+		/**
+		 * What south.doclick() does is set the Direction ("south")
+		 * Now the row is 4 and when it turns to north will be +1
+		 * So the expected result is 5
+		 */ 
+		in.south.doClick();
+		in.move.doClick();
+		
+		
+		assertEquals(life,env.getLifeForm(5, 5));
+	
+		
+	}
+	
 	
 	/**
 	 * This method tests that clicking north button will attached 
 	 * the correct command 
 	 */
+	
+	
 	@Test
 	public void testButtonClickNorthcommand()
 	{
@@ -136,11 +179,18 @@ public class TestInvoker
 		
 		Weapon wp = new MockGenericWeapon(50,12,5,5); 
 	    env.addWeapon(2, 2, wp, 1);
-	    // Test the Acquire button  
+	   /**
+	    * Test the Acquire button
+	    */
 		in.acquire.doClick();
 		assertEquals(wp,life.getWeapon());
 		assertNull(env.getWeapon(2, 2, 1));
-			//test the drop button 
+		
+		/**
+		 * Test the Drop button 
+		 */
+		
+			
 	    in.drop.doClick();
 		assertNull(life.getWeapon());
 		assertEquals(wp,env.getWeapon(2, 2, 1));
@@ -211,6 +261,7 @@ public class TestInvoker
 				
 		
 	}
+	
 	
 	
 

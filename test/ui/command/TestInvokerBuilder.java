@@ -20,6 +20,7 @@ public class TestInvokerBuilder {
 
 	/**
 	 * Test if each commands attached to each receiver 
+	 * @author Saad
 	 */
 	@Test
 	public void test() {
@@ -27,7 +28,7 @@ public class TestInvokerBuilder {
 		
 
 		LifeForm life = new MockLifeForm("Bob",60);
-		InvokerBuilder build = new InvokerBuilder();
+		InvokerBuilder build = new InvokerBuilder(); 
 		Invoker in = build.getInvoker(life);
 		
 		/**

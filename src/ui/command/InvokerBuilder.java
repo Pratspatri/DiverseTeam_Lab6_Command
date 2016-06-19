@@ -2,7 +2,7 @@ package ui.command;
 
 import lifeform.LifeForm;
 
-public class InvokerBuilder {
+public class InvokerBuilder { 
 	/**
 	 * get Invoker method 
 	 * @param life
@@ -12,7 +12,13 @@ public class InvokerBuilder {
 	
 	public Invoker getInvoker(LifeForm life)
 	{
+		/**
+		 * Crate the invoker 
+		 */
 		Invoker invoker = new Invoker();
+		/**
+		 * Set the command for the invoker 
+		 */
 		
 		invoker.setRelaod(new ReloadCommand(life)); 
 		invoker.setAcquire(new AcquireCommand(life));
