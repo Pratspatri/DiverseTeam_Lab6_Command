@@ -206,6 +206,7 @@ public class TestAttackCommand
 		
 		//direction is error.
 		life.setDirection("nothing");
-		attack.execute();
+		infor = attack.execute();
+		assertEquals(infor,"Can't attack!");
 	}
 }

@@ -42,7 +42,7 @@ public class DropCommand implements Command
 			int position = (slot1 == null)?1:2;
 			env.addWeapon(life.getRowTrack(), life.getColTrack(), life.getWeapon(),position);
 			life.dropWeapon();
-			return "Weapon has benn dropped";
+			return "Weapon has been dropped";
 		}
 	}
 

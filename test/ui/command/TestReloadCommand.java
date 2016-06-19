@@ -28,21 +28,21 @@ public class TestReloadCommand
 	public void testInitializationAndExecute() 
 	{
 		LifeForm life = new MockLifeForm("Bob",100);
-		Weapon wp = new MockGenericWeapon(50,15,2,5);
+		Weapon wp = new MockGenericWeapon(50,15,2,1);
 		life.pickUp(wp);
 		Command reload = new ReloadCommand(life);
 		//Initialization
 		assertTrue(reload instanceof Command);
-		assertEquals(5,life.getWeapon().getActualAmmo());
+		assertEquals(1,life.getWeapon().getActualAmmo());
 		
 		//Weapon shoots
 		life.getWeapon().fire(10) ;
-		assertEquals(4,life.getWeapon().getActualAmmo());
+		assertEquals(0,life.getWeapon().getActualAmmo());
 		
 		//Weapon reload.
 		String st = reload.execute();
 		assertEquals("The Weapon has been reloaded!",st);
-		assertEquals(5,life.getWeapon().getActualAmmo());
+		assertEquals(1,life.getWeapon().getActualAmmo());
 		
 	}
 	

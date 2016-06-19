@@ -10,6 +10,11 @@ import org.junit.Test;
 
 import environment.Environment;
 
+/**
+ * Test the MoveCommand Class
+ * @author Jixiang Lu
+ *
+ */
 public class TestMoveCommand 
 {
 
@@ -30,6 +35,9 @@ public class TestMoveCommand
 		Environment.resetInstance();
 	}
 	
+	/**
+	 * Test the initialization of MoveCommand Class.
+	 */
 	@Test
 	public void testInitialization()
 	{
@@ -39,6 +47,9 @@ public class TestMoveCommand
 		
 	}
 	
+	/**
+	 * Tests Execute method.
+	 */
 	@Test
 	public void testExecute()
 	{

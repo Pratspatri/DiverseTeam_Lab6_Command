@@ -64,7 +64,7 @@ public class TestDropCommand
 		
 		//LifeForm has no weapon.
 		String infor = drop.execute();
-		assertEquals("Weapon has benn dropped",infor);
+		assertEquals("Weapon has been dropped",infor);
 		assertNull(life.getWeapon());
 		
 		//LifeForm has weapon and there is enough space for the weapon in the Cell.
@@ -73,7 +73,7 @@ public class TestDropCommand
 		env.addWeapon(0, 0, wpCell,1);
 		life.pickUp(wpLife);
 		infor = drop.execute();
-		assertEquals("Weapon has benn dropped",infor);
+		assertEquals("Weapon has been dropped",infor);
 		assertNull(life.getWeapon());
 		assertEquals(wpLife,env.getWeapon(0, 0, 2));
 

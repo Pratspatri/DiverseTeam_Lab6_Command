@@ -7,9 +7,17 @@ import lifeform.MockLifeForm;
 
 import org.junit.Test;
 
+/**
+ * Test the TurnEastCommand Class.
+ * @author Jixiang Lu
+ *
+ */
 public class TestTurnEastCommand 
 {
 
+	/**
+	 * Test initialization and execute method.
+	 */
 	@Test
 	public void testInitializationAndExecute() {
 		LifeForm life = new MockLifeForm("Bob",60);

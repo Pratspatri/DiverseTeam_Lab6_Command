@@ -6,8 +6,16 @@ import lifeform.MockLifeForm;
 
 import org.junit.Test;
 
+/**
+ * Test TurnNorthCommand Class.
+ * @author Jixiang Lu
+ *
+ */
 public class TestTurnNorthCommand {
 
+	/**
+	 * Test initialization and execute method.
+	 */
 	@Test
 	public void testInitializationAndExecute() {
 		LifeForm life = new MockLifeForm("Bob",60);
